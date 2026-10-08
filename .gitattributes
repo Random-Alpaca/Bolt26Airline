@@ -1,2 +1,2 @@
-*Transactions.csv filter=lfs diff=lfs merge=lfs -text
 transactions*.csv filter=lfs diff=lfs merge=lfs -text
+*Transactions.csv filter=lfs diff=lfs merge=lfs -text
