@@ -1,0 +1,33 @@
+{
+  "source_files": {
+    "transactions.csv": {
+      "sha256": "acf1d81e85cd571f0983fe2a0eab32b3648e8ac01b02e3a2bd71c2fb95f5d3a1",
+      "bytes": 53415479
+    },
+    "costs.csv": {
+      "sha256": "e573319a9cc2138aa46561fa7c7bfbc4578f34e7bbc028afcfbb10e203b9a590",
+      "bytes": 7579681
+    },
+    "gates.csv": {
+      "sha256": "a07b339c7bccca0e172762810deda69d8f9a1dfefff512f5b810f9e235bf7830",
+      "bytes": 4488
+    },
+    "transaction_date_decisions.csv": {
+      "sha256": "49d2434a6693341f5b06f5382dd5fa431e51e759852f09f5824039e21336eab3",
+      "bytes": 1906413
+    }
+  },
+  "date_decisions_used": 22383,
+  "raw_transaction_rows": 559985,
+  "raw_revenue_cents": 37185982302,
+  "removed_duplicate_rows": 1856,
+  "removed_duplicate_revenue_cents": 123079817,
+  "date_fallback_rows": 11,
+  "date_fallback_gross_cents": 719542,
+  "deduplicated_transaction_rows": 558129,
+  "deduplicated_revenue_cents": 37062902485,
+  "cost_rows": 115204,
+  "cost_cents": 43136204024,
+  "booking_count": 353002,
+  "gate_rows": 112
+}

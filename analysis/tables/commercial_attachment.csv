@@ -1,0 +1,3 @@
+period,ticket_bookings,attached_bookings,extra_transactions,extra_cents,refunded_ticket_bookings,mixed_route_ticket_bookings,mixed_channel_ticket_bookings,mixed_tier_ticket_bookings
+1,171963,68064,78618,311574679,6229,6347,0,2603
+2,181040,70801,81980,324354622,6773,6565,0,2660

@@ -1,0 +1,3 @@
+period,physical_gates,listed_route_assignments,unassigned_gates,network_gate_charge,allocated_gate_charge,unallocated_gate_charge
+P1,34,54,2,9664400.00,9238700.00,425700.00
+P2,34,54,2,9877700.00,9444200.00,433500.00

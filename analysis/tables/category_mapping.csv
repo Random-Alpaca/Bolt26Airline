@@ -1,0 +1,174 @@
+Field,Raw_Value,Normalized_Value,Source_Rows
+Booking_Channel, Corporate Portal,Corporate Portal,3311
+Booking_Channel, Corporate Portal ,Corporate Portal,3372
+Booking_Channel, Direct Web,Direct Web,7528
+Booking_Channel, Direct Web ,Direct Web,7231
+Booking_Channel, Mobile App,Mobile App,4199
+Booking_Channel, Mobile App ,Mobile App,4184
+Booking_Channel, Online Travel Agency,Online Travel Agency,3676
+Booking_Channel, Online Travel Agency ,Online Travel Agency,3850
+Booking_Channel,App,Mobile App,3975
+Booking_Channel,CORP PORTAL,Corporate Portal,3392
+Booking_Channel,Corp Portal,Corporate Portal,3362
+Booking_Channel,Corporate,Corporate Portal,3339
+Booking_Channel,Corporate Portal,Corporate Portal,79270
+Booking_Channel,Corporate Portal ,Corporate Portal,3442
+Booking_Channel,DIRECT WEB,Direct Web,7793
+Booking_Channel,Direct Web,Direct Web,180024
+Booking_Channel,Direct Web ,Direct Web,7442
+Booking_Channel,MOBILE APP,Mobile App,3670
+Booking_Channel,Mobile,Mobile App,4007
+Booking_Channel,Mobile App,Mobile App,98105
+Booking_Channel,Mobile App ,Mobile App,4155
+Booking_Channel,OTA,Online Travel Agency,4043
+Booking_Channel,Online Travel Agcy,Online Travel Agency,4000
+Booking_Channel,Online Travel Agency,Online Travel Agency,90674
+Booking_Channel,Online Travel Agency ,Online Travel Agency,3997
+Booking_Channel,Web,Direct Web,7260
+Booking_Channel,Website,Direct Web,7216
+Booking_Channel,ota,Online Travel Agency,3468
+Membership_Tier,,Unknown,2137
+Membership_Tier, Blue,Blue,5089
+Membership_Tier, Blue ,Blue,5165
+Membership_Tier, Gold,Gold,1615
+Membership_Tier, Gold ,Gold,1653
+Membership_Tier, Non-Member,Non-Member,9900
+Membership_Tier, Non-Member ,Non-Member,10243
+Membership_Tier, Platinum,Platinum,633
+Membership_Tier, Platinum ,Platinum,548
+Membership_Tier, Silver,Silver,2772
+Membership_Tier, Silver ,Silver,2809
+Membership_Tier,Blue,Blue,121778
+Membership_Tier,Blue ,Blue,5030
+Membership_Tier,Gold,Gold,41078
+Membership_Tier,Gold ,Gold,1569
+Membership_Tier,N/A,Unknown,1968
+Membership_Tier,NONE,Unknown,2192
+Membership_Tier,Non-Member,Non-Member,245392
+Membership_Tier,Non-Member ,Non-Member,10237
+Membership_Tier,Platinum,Platinum,15131
+Membership_Tier,Platinum ,Platinum,685
+Membership_Tier,Silver,Silver,67424
+Membership_Tier,Silver ,Silver,2844
+Membership_Tier,Unknown,Unknown,2093
+Payment_Method,,Unknown,4456
+Payment_Method, CREDIT CARD,Credit Card,345
+Payment_Method, CREDIT CARD ,Credit Card,352
+Payment_Method, Credit Card,Credit Card,11128
+Payment_Method, Credit Card ,Credit Card,11621
+Payment_Method, DEBIT,Debit,76
+Payment_Method, DEBIT ,Debit,81
+Payment_Method, Debit,Debit,3532
+Payment_Method, Debit ,Debit,3403
+Payment_Method, POINTS + CASH,Points + Cash,52
+Payment_Method, POINTS + CASH ,Points + Cash,58
+Payment_Method, Points + Cash,Points + Cash,1671
+Payment_Method, Points + Cash ,Points + Cash,1690
+Payment_Method, TRAVEL VOUCHER,Travel Voucher,18
+Payment_Method, TRAVEL VOUCHER ,Travel Voucher,48
+Payment_Method, Travel Voucher,Travel Voucher,1001
+Payment_Method, Travel Voucher ,Travel Voucher,1095
+Payment_Method, credit card,Credit Card,307
+Payment_Method, credit card ,Credit Card,312
+Payment_Method, debit,Debit,88
+Payment_Method, debit ,Debit,128
+Payment_Method, points + cash,Points + Cash,58
+Payment_Method, points + cash ,Points + Cash,30
+Payment_Method, travel voucher,Travel Voucher,20
+Payment_Method, travel voucher ,Travel Voucher,43
+Payment_Method,CREDIT CARD,Credit Card,8330
+Payment_Method,CREDIT CARD ,Credit Card,319
+Payment_Method,Credit Card,Credit Card,309684
+Payment_Method,Credit Card ,Credit Card,11805
+Payment_Method,DEBIT,Debit,2516
+Payment_Method,DEBIT ,Debit,101
+Payment_Method,Debit,Debit,92161
+Payment_Method,Debit ,Debit,3260
+Payment_Method,POINTS + CASH,Points + Cash,1217
+Payment_Method,POINTS + CASH ,Points + Cash,56
+Payment_Method,Points + Cash,Points + Cash,47728
+Payment_Method,Points + Cash ,Points + Cash,1741
+Payment_Method,TRAVEL VOUCHER,Travel Voucher,608
+Payment_Method,TRAVEL VOUCHER ,Travel Voucher,20
+Payment_Method,Travel Voucher,Travel Voucher,25245
+Payment_Method,Travel Voucher ,Travel Voucher,765
+Payment_Method,credit card,Credit Card,8182
+Payment_Method,credit card ,Credit Card,283
+Payment_Method,debit,Debit,2231
+Payment_Method,debit ,Debit,103
+Payment_Method,points + cash,Points + Cash,1357
+Payment_Method,points + cash ,Points + Cash,32
+Payment_Method,travel voucher,Travel Voucher,616
+Payment_Method,travel voucher ,Travel Voucher,12
+Transaction_Type, CHANGE FEE,Change Fee,21
+Transaction_Type, CHANGE FEE ,Change Fee,23
+Transaction_Type, Change Fee,Change Fee,455
+Transaction_Type, Change Fee ,Change Fee,553
+Transaction_Type, EXTRA BAGGAGE,Extra Baggage,142
+Transaction_Type, EXTRA BAGGAGE ,Extra Baggage,184
+Transaction_Type, Extra Baggage,Extra Baggage,2963
+Transaction_Type, Extra Baggage ,Extra Baggage,3037
+Transaction_Type, FOOD & ONBOARD,Food & Onboard,67
+Transaction_Type, FOOD & ONBOARD ,Food & Onboard,77
+Transaction_Type, Food & Onboard,Food & Onboard,1717
+Transaction_Type, Food & Onboard ,Food & Onboard,1961
+Transaction_Type, REFUND,Refund,17
+Transaction_Type, REFUND ,Refund,13
+Transaction_Type, Refund,Refund,554
+Transaction_Type, Refund ,Refund,403
+Transaction_Type, SEAT UPGRADE,Seat Upgrade,49
+Transaction_Type, SEAT UPGRADE ,Seat Upgrade,48
+Transaction_Type, Seat Upgrade,Seat Upgrade,698
+Transaction_Type, Seat Upgrade ,Seat Upgrade,889
+Transaction_Type, TICKET,Ticket,545
+Transaction_Type, TICKET ,Ticket,568
+Transaction_Type, Ticket,Ticket,12688
+Transaction_Type, Ticket ,Ticket,12234
+Transaction_Type, change fee,Change Fee,14
+Transaction_Type, change fee ,Change Fee,7
+Transaction_Type, extra baggage,Extra Baggage,139
+Transaction_Type, extra baggage ,Extra Baggage,114
+Transaction_Type, food & onboard,Food & Onboard,75
+Transaction_Type, food & onboard ,Food & Onboard,75
+Transaction_Type, refund,Refund,36
+Transaction_Type, refund ,Refund,19
+Transaction_Type, seat upgrade,Seat Upgrade,27
+Transaction_Type, seat upgrade ,Seat Upgrade,27
+Transaction_Type, ticket,Ticket,557
+Transaction_Type, ticket ,Ticket,593
+Transaction_Type,CHANGE FEE,Change Fee,463
+Transaction_Type,CHANGE FEE ,Change Fee,15
+Transaction_Type,Change Fee,Change Fee,11632
+Transaction_Type,Change Fee ,Change Fee,507
+Transaction_Type,EXTRA BAGGAGE,Extra Baggage,3093
+Transaction_Type,EXTRA BAGGAGE ,Extra Baggage,131
+Transaction_Type,Extra Baggage,Extra Baggage,71605
+Transaction_Type,Extra Baggage ,Extra Baggage,2729
+Transaction_Type,FOOD & ONBOARD,Food & Onboard,1709
+Transaction_Type,FOOD & ONBOARD ,Food & Onboard,83
+Transaction_Type,Food & Onboard,Food & Onboard,43645
+Transaction_Type,Food & Onboard ,Food & Onboard,1683
+Transaction_Type,REFUND,Refund,572
+Transaction_Type,REFUND ,Refund,14
+Transaction_Type,Refund,Refund,10905
+Transaction_Type,Refund ,Refund,522
+Transaction_Type,SEAT UPGRADE,Seat Upgrade,818
+Transaction_Type,SEAT UPGRADE ,Seat Upgrade,40
+Transaction_Type,Seat Upgrade,Seat Upgrade,19916
+Transaction_Type,Seat Upgrade ,Seat Upgrade,805
+Transaction_Type,TICKET,Ticket,13462
+Transaction_Type,TICKET ,Ticket,584
+Transaction_Type,Ticket,Ticket,300167
+Transaction_Type,Ticket ,Ticket,12241
+Transaction_Type,change fee,Change Fee,549
+Transaction_Type,change fee ,Change Fee,40
+Transaction_Type,extra baggage,Extra Baggage,3168
+Transaction_Type,extra baggage ,Extra Baggage,149
+Transaction_Type,food & onboard,Food & Onboard,1915
+Transaction_Type,food & onboard ,Food & Onboard,66
+Transaction_Type,refund,Refund,496
+Transaction_Type,refund ,Refund,13
+Transaction_Type,seat upgrade,Seat Upgrade,869
+Transaction_Type,seat upgrade ,Seat Upgrade,65
+Transaction_Type,ticket,Ticket,13185
+Transaction_Type,ticket ,Ticket,540

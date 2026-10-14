@@ -1,0 +1,2 @@
+bookings,no_ticket_bookings,one_ticket_bookings,multiple_ticket_bookings,mixed_route_bookings,mixed_tier_bookings,mixed_channel_bookings,cross_period_bookings,refund_bookings,refund_without_ticket_bookings,extra_without_ticket_bookings,no_ticket_net_cents
+353002,0,339853,13149,12912,5386,0,3865,13501,0,0,0

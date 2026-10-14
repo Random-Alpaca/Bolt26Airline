@@ -1,0 +1,9 @@
+period,channel,ticket_bookings,attached_bookings,extra_cents,refunded_ticket_bookings
+1,Corporate Portal,30614,11930,55396564,894
+1,Direct Web,69333,27391,125462899,2324
+1,Mobile App,37442,14941,68246565,1237
+1,Online Travel Agency,34574,13802,62468651,1774
+2,Corporate Portal,32046,12313,56608215,880
+2,Direct Web,72549,28420,130385226,2527
+2,Mobile App,39755,15777,71975313,1385
+2,Online Travel Agency,36690,14291,65385868,1981

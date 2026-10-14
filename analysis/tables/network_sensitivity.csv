@@ -1,0 +1,9 @@
+period,scenario,contribution_change,contribution_before_gates,contribution_after_network_gates_scenario
+2,Baseline,0.00,-48377197.70,-58254897.70
+2,Net revenue +5%,9499963.93,-38877233.77,-48754933.77
+2,Net revenue -5%,-9499963.93,-57877161.63,-67754861.63
+2,Recorded operating cost -5%,11918823.81,-36458373.89,-46336073.89
+2,Fuel cost +10%,-8318233.02,-56695430.72,-66573130.72
+2,Refund outflow -10%,783405.25,-47593792.45,-57471492.45
+2,Paid extras +10%,336243.59,-48040954.11,-57918654.11
+2,Revenue +5% and recorded operating cost -5%,21418787.74,-26958409.96,-36836109.96
