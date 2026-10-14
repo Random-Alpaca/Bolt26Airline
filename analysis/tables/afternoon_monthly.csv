@@ -1,0 +1,541 @@
+route,cls,month,pm_flights,flights
+YEG-YYC,legacy flex,2024-09,2,29
+YEG-YYC,legacy flex,2024-10,2,33
+YEG-YYC,legacy flex,2024-11,1,31
+YEG-YYC,legacy flex,2024-12,4,34
+YEG-YYC,legacy flex,2025-01,0,30
+YEG-YYC,legacy flex,2025-02,0,27
+YEG-YYC,legacy flex,2025-03,1,32
+YEG-YYC,legacy flex,2025-04,1,30
+YEG-YYC,legacy flex,2025-05,1,31
+YEG-YYC,legacy flex,2025-06,5,35
+YEG-YYC,legacy flex,2025-07,6,36
+YEG-YYC,legacy flex,2025-08,6,35
+YEG-YYC,legacy flex,2025-09,2,31
+YEG-YYC,legacy flex,2025-10,2,32
+YEG-YYC,legacy flex,2025-11,1,31
+YEG-YYC,legacy flex,2025-12,4,34
+YEG-YYC,legacy flex,2026-01,0,30
+YEG-YYC,legacy flex,2026-02,0,27
+YEG-YYC,legacy flex,2026-03,1,32
+YEG-YYC,legacy flex,2026-04,1,30
+YEG-YYC,legacy flex,2026-05,1,31
+YEG-YYC,legacy flex,2026-06,5,35
+YEG-YYC,legacy flex,2026-07,6,36
+YEG-YYC,legacy flex,2026-08,6,35
+YHZ-YQM,new market,2025-04,12,24
+YHZ-YQM,new market,2025-05,14,28
+YHZ-YQM,new market,2025-06,15,30
+YHZ-YQM,new market,2025-07,16,32
+YHZ-YQM,new market,2025-08,15,30
+YHZ-YQM,new market,2025-09,13,26
+YHZ-YQM,new market,2025-10,14,28
+YHZ-YQM,new market,2025-11,13,26
+YHZ-YQM,new market,2025-12,15,30
+YHZ-YQM,new market,2026-01,12,24
+YHZ-YQM,new market,2026-02,12,24
+YHZ-YQM,new market,2026-03,15,30
+YHZ-YQM,new market,2026-04,12,24
+YHZ-YQM,new market,2026-05,14,28
+YHZ-YQM,new market,2026-06,15,30
+YHZ-YQM,new market,2026-07,16,32
+YHZ-YQM,new market,2026-08,15,30
+YHZ-YUL,2025 added rotation,2024-09,0,9
+YHZ-YUL,2025 added rotation,2024-10,0,10
+YHZ-YUL,2025 added rotation,2024-11,0,9
+YHZ-YUL,2025 added rotation,2024-12,0,10
+YHZ-YUL,2025 added rotation,2025-01,0,9
+YHZ-YUL,2025 added rotation,2025-02,0,8
+YHZ-YUL,2025 added rotation,2025-03,0,9
+YHZ-YUL,2025 added rotation,2025-04,9,18
+YHZ-YUL,2025 added rotation,2025-05,10,20
+YHZ-YUL,2025 added rotation,2025-06,10,20
+YHZ-YUL,2025 added rotation,2025-07,11,22
+YHZ-YUL,2025 added rotation,2025-08,11,22
+YHZ-YUL,2025 added rotation,2025-09,8,16
+YHZ-YUL,2025 added rotation,2025-10,10,20
+YHZ-YUL,2025 added rotation,2025-11,8,16
+YHZ-YUL,2025 added rotation,2025-12,9,18
+YHZ-YUL,2025 added rotation,2026-01,9,18
+YHZ-YUL,2025 added rotation,2026-02,8,16
+YHZ-YUL,2025 added rotation,2026-03,9,18
+YHZ-YUL,2025 added rotation,2026-04,9,18
+YHZ-YUL,2025 added rotation,2026-05,10,20
+YHZ-YUL,2025 added rotation,2026-06,10,20
+YHZ-YUL,2025 added rotation,2026-07,11,22
+YHZ-YUL,2025 added rotation,2026-08,11,22
+YHZ-YYZ,2025 added rotation,2024-09,0,14
+YHZ-YYZ,2025 added rotation,2024-10,0,15
+YHZ-YYZ,2025 added rotation,2024-11,0,14
+YHZ-YYZ,2025 added rotation,2024-12,0,16
+YHZ-YYZ,2025 added rotation,2025-01,0,14
+YHZ-YYZ,2025 added rotation,2025-02,0,13
+YHZ-YYZ,2025 added rotation,2025-03,0,15
+YHZ-YYZ,2025 added rotation,2025-04,15,30
+YHZ-YYZ,2025 added rotation,2025-05,15,30
+YHZ-YYZ,2025 added rotation,2025-06,16,32
+YHZ-YYZ,2025 added rotation,2025-07,18,36
+YHZ-YYZ,2025 added rotation,2025-08,18,36
+YHZ-YYZ,2025 added rotation,2025-09,15,30
+YHZ-YYZ,2025 added rotation,2025-10,16,32
+YHZ-YYZ,2025 added rotation,2025-11,14,28
+YHZ-YYZ,2025 added rotation,2025-12,17,34
+YHZ-YYZ,2025 added rotation,2026-01,14,28
+YHZ-YYZ,2025 added rotation,2026-02,13,26
+YHZ-YYZ,2025 added rotation,2026-03,15,30
+YHZ-YYZ,2025 added rotation,2026-04,15,30
+YHZ-YYZ,2025 added rotation,2026-05,15,30
+YHZ-YYZ,2025 added rotation,2026-06,16,32
+YHZ-YYZ,2025 added rotation,2026-07,18,36
+YHZ-YYZ,2025 added rotation,2026-08,18,36
+YLW-YVR,legacy flex,2024-09,3,32
+YLW-YVR,legacy flex,2024-10,3,33
+YLW-YVR,legacy flex,2024-11,1,28
+YLW-YVR,legacy flex,2024-12,5,35
+YLW-YVR,legacy flex,2025-01,0,30
+YLW-YVR,legacy flex,2025-02,0,28
+YLW-YVR,legacy flex,2025-03,2,33
+YLW-YVR,legacy flex,2025-04,2,30
+YLW-YVR,legacy flex,2025-05,3,33
+YLW-YVR,legacy flex,2025-06,6,36
+YLW-YVR,legacy flex,2025-07,7,37
+YLW-YVR,legacy flex,2025-08,4,35
+YLW-YVR,legacy flex,2025-09,3,32
+YLW-YVR,legacy flex,2025-10,3,34
+YLW-YVR,legacy flex,2025-11,1,31
+YLW-YVR,legacy flex,2025-12,5,36
+YLW-YVR,legacy flex,2026-01,0,30
+YLW-YVR,legacy flex,2026-02,0,28
+YLW-YVR,legacy flex,2026-03,2,33
+YLW-YVR,legacy flex,2026-04,2,30
+YLW-YVR,legacy flex,2026-05,3,33
+YLW-YVR,legacy flex,2026-06,6,36
+YLW-YVR,legacy flex,2026-07,7,37
+YLW-YVR,legacy flex,2026-08,4,35
+YOW-YUL,new market,2025-03,21,42
+YOW-YUL,new market,2025-04,22,44
+YOW-YUL,new market,2025-05,23,46
+YOW-YUL,new market,2025-06,24,48
+YOW-YUL,new market,2025-07,26,52
+YOW-YUL,new market,2025-08,26,52
+YOW-YUL,new market,2025-09,22,44
+YOW-YUL,new market,2025-10,22,44
+YOW-YUL,new market,2025-11,21,42
+YOW-YUL,new market,2025-12,24,48
+YOW-YUL,new market,2026-01,21,42
+YOW-YUL,new market,2026-02,20,40
+YOW-YUL,new market,2026-03,21,42
+YOW-YUL,new market,2026-04,22,44
+YOW-YUL,new market,2026-05,23,46
+YOW-YUL,new market,2026-06,24,48
+YOW-YUL,new market,2026-07,26,52
+YOW-YUL,new market,2026-08,26,52
+YOW-YYZ,legacy + 2025 added,2024-09,12,41
+YOW-YYZ,legacy + 2025 added,2024-10,14,44
+YOW-YYZ,legacy + 2025 added,2024-11,11,40
+YOW-YYZ,legacy + 2025 added,2024-12,17,48
+YOW-YYZ,legacy + 2025 added,2025-01,10,41
+YOW-YYZ,legacy + 2025 added,2025-02,9,36
+YOW-YYZ,legacy + 2025 added,2025-03,56,86
+YOW-YYZ,legacy + 2025 added,2025-04,50,80
+YOW-YYZ,legacy + 2025 added,2025-05,59,90
+YOW-YYZ,legacy + 2025 added,2025-06,63,92
+YOW-YYZ,legacy + 2025 added,2025-07,65,94
+YOW-YYZ,legacy + 2025 added,2025-08,67,96
+YOW-YYZ,legacy + 2025 added,2025-09,56,86
+YOW-YYZ,legacy + 2025 added,2025-10,57,88
+YOW-YYZ,legacy + 2025 added,2025-11,52,82
+YOW-YYZ,legacy + 2025 added,2025-12,61,90
+YOW-YYZ,legacy + 2025 added,2026-01,51,82
+YOW-YYZ,legacy + 2025 added,2026-02,45,72
+YOW-YYZ,legacy + 2025 added,2026-03,56,86
+YOW-YYZ,legacy + 2025 added,2026-04,50,80
+YOW-YYZ,legacy + 2025 added,2026-05,59,90
+YOW-YYZ,legacy + 2025 added,2026-06,63,92
+YOW-YYZ,legacy + 2025 added,2026-07,65,94
+YOW-YYZ,legacy + 2025 added,2026-08,67,96
+YQM-YHZ,new market,2025-04,13,26
+YQM-YHZ,new market,2025-05,14,28
+YQM-YHZ,new market,2025-06,15,30
+YQM-YHZ,new market,2025-07,15,30
+YQM-YHZ,new market,2025-08,15,30
+YQM-YHZ,new market,2025-09,14,28
+YQM-YHZ,new market,2025-10,14,28
+YQM-YHZ,new market,2025-11,13,26
+YQM-YHZ,new market,2025-12,14,28
+YQM-YHZ,new market,2026-01,13,26
+YQM-YHZ,new market,2026-02,13,26
+YQM-YHZ,new market,2026-03,15,30
+YQM-YHZ,new market,2026-04,13,26
+YQM-YHZ,new market,2026-05,14,28
+YQM-YHZ,new market,2026-06,15,30
+YQM-YHZ,new market,2026-07,15,30
+YQM-YHZ,new market,2026-08,15,30
+YUL-YHZ,2025 added rotation,2024-09,0,9
+YUL-YHZ,2025 added rotation,2024-10,0,9
+YUL-YHZ,2025 added rotation,2024-11,0,7
+YUL-YHZ,2025 added rotation,2024-12,0,10
+YUL-YHZ,2025 added rotation,2025-01,0,9
+YUL-YHZ,2025 added rotation,2025-02,0,8
+YUL-YHZ,2025 added rotation,2025-03,0,9
+YUL-YHZ,2025 added rotation,2025-04,9,18
+YUL-YHZ,2025 added rotation,2025-05,10,20
+YUL-YHZ,2025 added rotation,2025-06,10,20
+YUL-YHZ,2025 added rotation,2025-07,11,22
+YUL-YHZ,2025 added rotation,2025-08,11,22
+YUL-YHZ,2025 added rotation,2025-09,9,18
+YUL-YHZ,2025 added rotation,2025-10,9,18
+YUL-YHZ,2025 added rotation,2025-11,9,18
+YUL-YHZ,2025 added rotation,2025-12,10,20
+YUL-YHZ,2025 added rotation,2026-01,9,18
+YUL-YHZ,2025 added rotation,2026-02,8,16
+YUL-YHZ,2025 added rotation,2026-03,9,18
+YUL-YHZ,2025 added rotation,2026-04,9,18
+YUL-YHZ,2025 added rotation,2026-05,10,20
+YUL-YHZ,2025 added rotation,2026-06,10,20
+YUL-YHZ,2025 added rotation,2026-07,11,22
+YUL-YHZ,2025 added rotation,2026-08,11,22
+YUL-YOW,new market,2025-03,23,46
+YUL-YOW,new market,2025-04,22,44
+YUL-YOW,new market,2025-05,21,42
+YUL-YOW,new market,2025-06,24,48
+YUL-YOW,new market,2025-07,25,50
+YUL-YOW,new market,2025-08,25,50
+YUL-YOW,new market,2025-09,23,46
+YUL-YOW,new market,2025-10,22,44
+YUL-YOW,new market,2025-11,21,42
+YUL-YOW,new market,2025-12,24,48
+YUL-YOW,new market,2026-01,23,46
+YUL-YOW,new market,2026-02,20,40
+YUL-YOW,new market,2026-03,23,46
+YUL-YOW,new market,2026-04,22,44
+YUL-YOW,new market,2026-05,21,42
+YUL-YOW,new market,2026-06,24,48
+YUL-YOW,new market,2026-07,25,50
+YUL-YOW,new market,2026-08,25,50
+YUL-YVR,2025 added rotation,2024-09,0,13
+YUL-YVR,2025 added rotation,2024-10,0,12
+YUL-YVR,2025 added rotation,2024-11,0,12
+YUL-YVR,2025 added rotation,2024-12,0,14
+YUL-YVR,2025 added rotation,2025-01,0,10
+YUL-YVR,2025 added rotation,2025-02,0,11
+YUL-YVR,2025 added rotation,2025-03,0,13
+YUL-YVR,2025 added rotation,2025-04,13,26
+YUL-YVR,2025 added rotation,2025-05,13,26
+YUL-YVR,2025 added rotation,2025-06,14,28
+YUL-YVR,2025 added rotation,2025-07,15,30
+YUL-YVR,2025 added rotation,2025-08,13,26
+YUL-YVR,2025 added rotation,2025-09,12,24
+YUL-YVR,2025 added rotation,2025-10,13,26
+YUL-YVR,2025 added rotation,2025-11,12,24
+YUL-YVR,2025 added rotation,2025-12,14,28
+YUL-YVR,2025 added rotation,2026-01,10,20
+YUL-YVR,2025 added rotation,2026-02,11,22
+YUL-YVR,2025 added rotation,2026-03,13,26
+YUL-YVR,2025 added rotation,2026-04,13,26
+YUL-YVR,2025 added rotation,2026-05,13,26
+YUL-YVR,2025 added rotation,2026-06,14,28
+YUL-YVR,2025 added rotation,2026-07,15,30
+YUL-YVR,2025 added rotation,2026-08,13,26
+YUL-YYZ,2025 added rotation,2024-09,0,27
+YUL-YYZ,2025 added rotation,2024-10,0,27
+YUL-YYZ,2025 added rotation,2024-11,0,24
+YUL-YYZ,2025 added rotation,2024-12,0,28
+YUL-YYZ,2025 added rotation,2025-01,0,24
+YUL-YYZ,2025 added rotation,2025-02,0,22
+YUL-YYZ,2025 added rotation,2025-03,25,50
+YUL-YYZ,2025 added rotation,2025-04,25,50
+YUL-YYZ,2025 added rotation,2025-05,25,50
+YUL-YYZ,2025 added rotation,2025-06,29,58
+YUL-YYZ,2025 added rotation,2025-07,29,58
+YUL-YYZ,2025 added rotation,2025-08,29,58
+YUL-YYZ,2025 added rotation,2025-09,26,52
+YUL-YYZ,2025 added rotation,2025-10,26,52
+YUL-YYZ,2025 added rotation,2025-11,25,50
+YUL-YYZ,2025 added rotation,2025-12,29,58
+YUL-YYZ,2025 added rotation,2026-01,24,48
+YUL-YYZ,2025 added rotation,2026-02,22,44
+YUL-YYZ,2025 added rotation,2026-03,25,50
+YUL-YYZ,2025 added rotation,2026-04,25,50
+YUL-YYZ,2025 added rotation,2026-05,25,50
+YUL-YYZ,2025 added rotation,2026-06,29,58
+YUL-YYZ,2025 added rotation,2026-07,29,58
+YUL-YYZ,2025 added rotation,2026-08,29,58
+YVR-YLW,legacy flex,2024-09,4,34
+YVR-YLW,legacy flex,2024-10,4,35
+YVR-YLW,legacy flex,2024-11,2,32
+YVR-YLW,legacy flex,2024-12,5,35
+YVR-YLW,legacy flex,2025-01,1,31
+YVR-YLW,legacy flex,2025-02,1,29
+YVR-YLW,legacy flex,2025-03,3,32
+YVR-YLW,legacy flex,2025-04,3,29
+YVR-YLW,legacy flex,2025-05,4,35
+YVR-YLW,legacy flex,2025-06,6,34
+YVR-YLW,legacy flex,2025-07,9,40
+YVR-YLW,legacy flex,2025-08,9,40
+YVR-YLW,legacy flex,2025-09,4,32
+YVR-YLW,legacy flex,2025-10,4,35
+YVR-YLW,legacy flex,2025-11,2,32
+YVR-YLW,legacy flex,2025-12,6,36
+YVR-YLW,legacy flex,2026-01,1,31
+YVR-YLW,legacy flex,2026-02,1,29
+YVR-YLW,legacy flex,2026-03,3,32
+YVR-YLW,legacy flex,2026-04,3,29
+YVR-YLW,legacy flex,2026-05,4,35
+YVR-YLW,legacy flex,2026-06,6,34
+YVR-YLW,legacy flex,2026-07,9,40
+YVR-YLW,legacy flex,2026-08,9,40
+YVR-YUL,2025 added rotation,2024-09,0,13
+YVR-YUL,2025 added rotation,2024-10,0,13
+YVR-YUL,2025 added rotation,2024-11,0,12
+YVR-YUL,2025 added rotation,2024-12,0,14
+YVR-YUL,2025 added rotation,2025-01,0,12
+YVR-YUL,2025 added rotation,2025-02,0,11
+YVR-YUL,2025 added rotation,2025-03,0,13
+YVR-YUL,2025 added rotation,2025-04,13,26
+YVR-YUL,2025 added rotation,2025-05,13,26
+YVR-YUL,2025 added rotation,2025-06,14,28
+YVR-YUL,2025 added rotation,2025-07,15,30
+YVR-YUL,2025 added rotation,2025-08,14,28
+YVR-YUL,2025 added rotation,2025-09,13,26
+YVR-YUL,2025 added rotation,2025-10,13,26
+YVR-YUL,2025 added rotation,2025-11,12,24
+YVR-YUL,2025 added rotation,2025-12,14,28
+YVR-YUL,2025 added rotation,2026-01,12,24
+YVR-YUL,2025 added rotation,2026-02,11,22
+YVR-YUL,2025 added rotation,2026-03,13,26
+YVR-YUL,2025 added rotation,2026-04,13,26
+YVR-YUL,2025 added rotation,2026-05,13,26
+YVR-YUL,2025 added rotation,2026-06,14,28
+YVR-YUL,2025 added rotation,2026-07,15,30
+YVR-YUL,2025 added rotation,2026-08,14,28
+YVR-YYC,legacy flex,2024-09,0,27
+YVR-YYC,legacy flex,2024-10,0,29
+YVR-YYC,legacy flex,2024-11,0,27
+YVR-YYC,legacy flex,2024-12,0,31
+YVR-YYC,legacy flex,2025-01,0,27
+YVR-YYC,legacy flex,2025-02,0,22
+YVR-YYC,legacy flex,2025-03,0,28
+YVR-YYC,legacy flex,2025-04,0,27
+YVR-YYC,legacy flex,2025-05,0,27
+YVR-YYC,legacy flex,2025-06,0,28
+YVR-YYC,legacy flex,2025-07,1,31
+YVR-YYC,legacy flex,2025-08,1,32
+YVR-YYC,legacy flex,2025-09,0,27
+YVR-YYC,legacy flex,2025-10,0,29
+YVR-YYC,legacy flex,2025-11,0,26
+YVR-YYC,legacy flex,2025-12,0,30
+YVR-YYC,legacy flex,2026-01,0,27
+YVR-YYC,legacy flex,2026-02,0,22
+YVR-YYC,legacy flex,2026-03,0,28
+YVR-YYC,legacy flex,2026-04,0,27
+YVR-YYC,legacy flex,2026-05,0,27
+YVR-YYC,legacy flex,2026-06,0,28
+YVR-YYC,legacy flex,2026-07,1,31
+YVR-YYC,legacy flex,2026-08,1,32
+YVR-YYJ,legacy flex,2024-09,12,40
+YVR-YYJ,legacy flex,2024-10,12,42
+YVR-YYJ,legacy flex,2024-11,10,40
+YVR-YYJ,legacy flex,2024-12,14,44
+YVR-YYJ,legacy flex,2025-01,8,39
+YVR-YYJ,legacy flex,2025-02,8,35
+YVR-YYJ,legacy flex,2025-03,11,41
+YVR-YYJ,legacy flex,2025-04,10,40
+YVR-YYJ,legacy flex,2025-05,12,42
+YVR-YYJ,legacy flex,2025-06,13,43
+YVR-YYJ,legacy flex,2025-07,17,46
+YVR-YYJ,legacy flex,2025-08,17,48
+YVR-YYJ,legacy flex,2025-09,12,41
+YVR-YYJ,legacy flex,2025-10,11,40
+YVR-YYJ,legacy flex,2025-11,9,39
+YVR-YYJ,legacy flex,2025-12,15,45
+YVR-YYJ,legacy flex,2026-01,8,39
+YVR-YYJ,legacy flex,2026-02,8,35
+YVR-YYJ,legacy flex,2026-03,11,41
+YVR-YYJ,legacy flex,2026-04,10,40
+YVR-YYJ,legacy flex,2026-05,12,42
+YVR-YYJ,legacy flex,2026-06,13,43
+YVR-YYJ,legacy flex,2026-07,17,46
+YVR-YYJ,legacy flex,2026-08,17,48
+YXU-YYZ,new market,2025-02,17,34
+YXU-YYZ,new market,2025-03,23,46
+YXU-YYZ,new market,2025-04,21,42
+YXU-YYZ,new market,2025-05,23,46
+YXU-YYZ,new market,2025-06,23,46
+YXU-YYZ,new market,2025-07,25,50
+YXU-YYZ,new market,2025-08,26,52
+YXU-YYZ,new market,2025-09,21,42
+YXU-YYZ,new market,2025-10,23,46
+YXU-YYZ,new market,2025-11,21,42
+YXU-YYZ,new market,2025-12,25,50
+YXU-YYZ,new market,2026-01,17,34
+YXU-YYZ,new market,2026-02,17,34
+YXU-YYZ,new market,2026-03,23,46
+YXU-YYZ,new market,2026-04,21,42
+YXU-YYZ,new market,2026-05,23,46
+YXU-YYZ,new market,2026-06,23,46
+YXU-YYZ,new market,2026-07,25,50
+YXU-YYZ,new market,2026-08,26,52
+YYC-YEG,legacy flex,2024-09,3,31
+YYC-YEG,legacy flex,2024-10,3,33
+YYC-YEG,legacy flex,2024-11,1,30
+YYC-YEG,legacy flex,2024-12,5,35
+YYC-YEG,legacy flex,2025-01,0,29
+YYC-YEG,legacy flex,2025-02,0,27
+YYC-YEG,legacy flex,2025-03,2,31
+YYC-YEG,legacy flex,2025-04,2,31
+YYC-YEG,legacy flex,2025-05,2,31
+YYC-YEG,legacy flex,2025-06,5,35
+YYC-YEG,legacy flex,2025-07,7,37
+YYC-YEG,legacy flex,2025-08,7,38
+YYC-YEG,legacy flex,2025-09,3,32
+YYC-YEG,legacy flex,2025-10,3,34
+YYC-YEG,legacy flex,2025-11,1,31
+YYC-YEG,legacy flex,2025-12,5,36
+YYC-YEG,legacy flex,2026-01,0,29
+YYC-YEG,legacy flex,2026-02,0,27
+YYC-YEG,legacy flex,2026-03,2,31
+YYC-YEG,legacy flex,2026-04,2,31
+YYC-YEG,legacy flex,2026-05,2,31
+YYC-YEG,legacy flex,2026-06,5,35
+YYC-YEG,legacy flex,2026-07,7,37
+YYC-YEG,legacy flex,2026-08,7,38
+YYC-YVR,legacy flex,2024-09,0,26
+YYC-YVR,legacy flex,2024-10,0,29
+YYC-YVR,legacy flex,2024-11,0,27
+YYC-YVR,legacy flex,2024-12,1,31
+YYC-YVR,legacy flex,2025-01,0,28
+YYC-YVR,legacy flex,2025-02,0,23
+YYC-YVR,legacy flex,2025-03,0,27
+YYC-YVR,legacy flex,2025-04,0,28
+YYC-YVR,legacy flex,2025-05,0,28
+YYC-YVR,legacy flex,2025-06,1,31
+YYC-YVR,legacy flex,2025-07,3,33
+YYC-YVR,legacy flex,2025-08,3,34
+YYC-YVR,legacy flex,2025-09,0,29
+YYC-YVR,legacy flex,2025-10,0,29
+YYC-YVR,legacy flex,2025-11,0,28
+YYC-YVR,legacy flex,2025-12,1,32
+YYC-YVR,legacy flex,2026-01,0,28
+YYC-YVR,legacy flex,2026-02,0,23
+YYC-YVR,legacy flex,2026-03,0,27
+YYC-YVR,legacy flex,2026-04,0,28
+YYC-YVR,legacy flex,2026-05,0,28
+YYC-YVR,legacy flex,2026-06,1,31
+YYC-YVR,legacy flex,2026-07,3,33
+YYC-YVR,legacy flex,2026-08,3,34
+YYJ-YVR,legacy flex,2024-09,9,37
+YYJ-YVR,legacy flex,2024-10,11,41
+YYJ-YVR,legacy flex,2024-11,8,36
+YYJ-YVR,legacy flex,2024-12,13,44
+YYJ-YVR,legacy flex,2025-01,7,38
+YYJ-YVR,legacy flex,2025-02,6,31
+YYJ-YVR,legacy flex,2025-03,9,40
+YYJ-YVR,legacy flex,2025-04,8,38
+YYJ-YVR,legacy flex,2025-05,11,39
+YYJ-YVR,legacy flex,2025-06,14,44
+YYJ-YVR,legacy flex,2025-07,16,47
+YYJ-YVR,legacy flex,2025-08,16,45
+YYJ-YVR,legacy flex,2025-09,9,38
+YYJ-YVR,legacy flex,2025-10,9,40
+YYJ-YVR,legacy flex,2025-11,8,38
+YYJ-YVR,legacy flex,2025-12,13,44
+YYJ-YVR,legacy flex,2026-01,7,38
+YYJ-YVR,legacy flex,2026-02,6,31
+YYJ-YVR,legacy flex,2026-03,9,40
+YYJ-YVR,legacy flex,2026-04,8,38
+YYJ-YVR,legacy flex,2026-05,11,39
+YYJ-YVR,legacy flex,2026-06,14,44
+YYJ-YVR,legacy flex,2026-07,16,47
+YYJ-YVR,legacy flex,2026-08,16,45
+YYZ-YHZ,2025 added rotation,2024-09,0,13
+YYZ-YHZ,2025 added rotation,2024-10,0,14
+YYZ-YHZ,2025 added rotation,2024-11,0,14
+YYZ-YHZ,2025 added rotation,2024-12,0,16
+YYZ-YHZ,2025 added rotation,2025-01,0,13
+YYZ-YHZ,2025 added rotation,2025-02,0,12
+YYZ-YHZ,2025 added rotation,2025-03,0,13
+YYZ-YHZ,2025 added rotation,2025-04,13,26
+YYZ-YHZ,2025 added rotation,2025-05,14,28
+YYZ-YHZ,2025 added rotation,2025-06,15,30
+YYZ-YHZ,2025 added rotation,2025-07,16,32
+YYZ-YHZ,2025 added rotation,2025-08,17,34
+YYZ-YHZ,2025 added rotation,2025-09,14,28
+YYZ-YHZ,2025 added rotation,2025-10,15,30
+YYZ-YHZ,2025 added rotation,2025-11,14,28
+YYZ-YHZ,2025 added rotation,2025-12,16,32
+YYZ-YHZ,2025 added rotation,2026-01,13,26
+YYZ-YHZ,2025 added rotation,2026-02,12,24
+YYZ-YHZ,2025 added rotation,2026-03,13,26
+YYZ-YHZ,2025 added rotation,2026-04,13,26
+YYZ-YHZ,2025 added rotation,2026-05,14,28
+YYZ-YHZ,2025 added rotation,2026-06,15,30
+YYZ-YHZ,2025 added rotation,2026-07,16,32
+YYZ-YHZ,2025 added rotation,2026-08,17,34
+YYZ-YOW,legacy + 2025 added,2024-09,14,43
+YYZ-YOW,legacy + 2025 added,2024-10,15,46
+YYZ-YOW,legacy + 2025 added,2024-11,12,41
+YYZ-YOW,legacy + 2025 added,2024-12,17,47
+YYZ-YOW,legacy + 2025 added,2025-01,11,42
+YYZ-YOW,legacy + 2025 added,2025-02,10,38
+YYZ-YOW,legacy + 2025 added,2025-03,57,88
+YYZ-YOW,legacy + 2025 added,2025-04,56,86
+YYZ-YOW,legacy + 2025 added,2025-05,58,88
+YYZ-YOW,legacy + 2025 added,2025-06,63,90
+YYZ-YOW,legacy + 2025 added,2025-07,70,100
+YYZ-YOW,legacy + 2025 added,2025-08,68,98
+YYZ-YOW,legacy + 2025 added,2025-09,56,86
+YYZ-YOW,legacy + 2025 added,2025-10,61,92
+YYZ-YOW,legacy + 2025 added,2025-11,52,82
+YYZ-YOW,legacy + 2025 added,2025-12,63,92
+YYZ-YOW,legacy + 2025 added,2026-01,53,84
+YYZ-YOW,legacy + 2025 added,2026-02,48,76
+YYZ-YOW,legacy + 2025 added,2026-03,57,88
+YYZ-YOW,legacy + 2025 added,2026-04,56,86
+YYZ-YOW,legacy + 2025 added,2026-05,58,88
+YYZ-YOW,legacy + 2025 added,2026-06,63,90
+YYZ-YOW,legacy + 2025 added,2026-07,70,100
+YYZ-YOW,legacy + 2025 added,2026-08,68,98
+YYZ-YUL,2025 added rotation,2024-09,0,25
+YYZ-YUL,2025 added rotation,2024-10,0,27
+YYZ-YUL,2025 added rotation,2024-11,0,24
+YYZ-YUL,2025 added rotation,2024-12,0,28
+YYZ-YUL,2025 added rotation,2025-01,0,23
+YYZ-YUL,2025 added rotation,2025-02,0,22
+YYZ-YUL,2025 added rotation,2025-03,26,52
+YYZ-YUL,2025 added rotation,2025-04,26,52
+YYZ-YUL,2025 added rotation,2025-05,27,54
+YYZ-YUL,2025 added rotation,2025-06,27,54
+YYZ-YUL,2025 added rotation,2025-07,30,60
+YYZ-YUL,2025 added rotation,2025-08,30,60
+YYZ-YUL,2025 added rotation,2025-09,25,50
+YYZ-YUL,2025 added rotation,2025-10,27,54
+YYZ-YUL,2025 added rotation,2025-11,25,50
+YYZ-YUL,2025 added rotation,2025-12,29,58
+YYZ-YUL,2025 added rotation,2026-01,23,46
+YYZ-YUL,2025 added rotation,2026-02,22,44
+YYZ-YUL,2025 added rotation,2026-03,26,52
+YYZ-YUL,2025 added rotation,2026-04,26,52
+YYZ-YUL,2025 added rotation,2026-05,27,54
+YYZ-YUL,2025 added rotation,2026-06,27,54
+YYZ-YUL,2025 added rotation,2026-07,30,60
+YYZ-YUL,2025 added rotation,2026-08,30,60
+YYZ-YXU,new market,2025-02,19,38
+YYZ-YXU,new market,2025-03,23,46
+YYZ-YXU,new market,2025-04,21,42
+YYZ-YXU,new market,2025-05,22,44
+YYZ-YXU,new market,2025-06,24,48
+YYZ-YXU,new market,2025-07,25,50
+YYZ-YXU,new market,2025-08,23,46
+YYZ-YXU,new market,2025-09,23,46
+YYZ-YXU,new market,2025-10,23,46
+YYZ-YXU,new market,2025-11,21,42
+YYZ-YXU,new market,2025-12,24,48
+YYZ-YXU,new market,2026-01,19,38
+YYZ-YXU,new market,2026-02,19,38
+YYZ-YXU,new market,2026-03,23,46
+YYZ-YXU,new market,2026-04,21,42
+YYZ-YXU,new market,2026-05,22,44
+YYZ-YXU,new market,2026-06,24,48
+YYZ-YXU,new market,2026-07,25,50
+YYZ-YXU,new market,2026-08,23,46
