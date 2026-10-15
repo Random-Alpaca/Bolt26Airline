@@ -12,7 +12,7 @@ Recorded before preparing the analysis on 2026-10-11. Existing source files and 
 8. **Operating activity:** A distinct Cost_Date plus Route_ID with one of each of the four cost categories is called a cost event. It is only a proxy for departure activity; no flight IDs, capacity, distance, passenger counts, or load factors are available. Revenue or ticket transactions per cost event are descriptive ratios, not fares, yields, occupancy, or unit economics per passenger.
 9. **Gates:** Deduplicate gate charges by City, Gate_Number, and Year only if all repeated costs agree. For a separate illustrative scenario, map 2024-2025 to Period 1 and 2025-2026 to Period 2. This mapping is assumed, not established by source metadata. Allocate each shared gate's cost equally across its distinct listed routes within that period; keep costs of gates with no listed route unallocated. Report network gate costs including unallocated gates. Do not include this scenario in the primary contribution measure.
 10. **Routes:** Treat each direction as a distinct route; optionally combine reverse directions into a market for comparisons. Do not infer that blank gate routes are zero-cost or infer their assignments. Use cleaned route codes from current CSVs.
-11. **Interpretation:** Large differences and outliers are review leads, not proof of errors or causal effects. Decomposition and sensitivity exercises are arithmetic scenarios, not forecasts. No external market, competitor, economic, or benchmark claims are made.
+11. **Interpretation:** Large differences and outliers are review leads, not proof of errors or causal effects. Decomposition and sensitivity exercises are arithmetic scenarios, not forecasts. No external market, competitor, economic, or benchmark claims are made, except the cited ancillary benchmarks in 17.
 
 Any additional assumptions will be added here before they are used.
 
@@ -20,3 +20,29 @@ Any additional assumptions will be added here before they are used.
 13. **Adjusted channel comparisons:** For descriptive Direct Web versus Online Travel Agency ticket transaction values, compare cells with both channels in the same route and recorded month, then weight both channel means using the same pooled ticket-transaction count per cell. This adjusts observed route/month mix only; it does not establish a channel price or commission effect.
 14. **Sensitivity scenarios:** Apply hypothetical proportional changes to recorded net revenue, operating or fuel costs, refund outflows, or paid extras while holding all other recorded amounts and activity fixed. These arithmetic scenarios do not predict demand responses or avoidable costs. The uncertain-date alternative scenario changes only the 11 unresolved dates to D/M/Y, retaining any amounts that move outside the observed window in a separately labeled bucket.
 15. **Membership attachment robustness check:** For a supplementary booking comparison, assign membership using only ticket transactions in the same period. Require all those ticket tiers to agree; label disagreement Mixed and retain Unknown. Measure extras on the booking in that same period. This avoids allowing an inconsistent tier on an add-on transaction to determine the cohort, but does not infer a customer's actual status or repair the source.
+16. **Cost_Date time is the departure time:** The data dictionary says only "the date and time of the flight." We read the clock time as the departure time because:
+    - each route repeats the same fixed time slots;
+    - the times fall into two groups, 06:30–08:00 and 12:00–18:10, with nothing in between.
+
+    A departure at 12:00 or later counts as an afternoon flight. Any cutoff from 08:01 to 12:00 gives the same split. If the time were the arrival instead, the slots would shift but the two groups would stay separate, so the afternoon-flight classes and the March 2025 change would not move. Revenue still cannot be assigned to a specific departure (see 5 and 8). Used in `afternoon.py` and `alternatives.py`.
+17. **External ancillary benchmarks (added 2026-10-14):** Used only to show that the take-rate scenarios are plausible and to size the ancillary ceiling against the Fill the Planes gap. They are never inputs to the recorded results.
+    - The case data has no currency. The outside figures are US$. We compare them one-for-one and label them as an assumption.
+    - Air Canada's 17% share includes Aeroplan loyalty revenue, so it is not like-for-like with our three paid extras. It shows the size of the gap, not a target.
+    - Airlines rarely publish take rates for individual add-ons. Survey figures are stated preferences or willingness to pay, not observed purchases.
+    - Most sources are consultancy or vendor reports (IdeaWorksCompany, sponsored by CarTrawler/SeatMaps). Cite them as such.
+
+    | Benchmark | Figure | Source |
+    |---|---|---|
+    | Air Canada ancillary share | 17% of revenue, US$2.78B (2025); lowest among North American peers | IdeaWorks 2026 Yearbook, via [Travelweek](https://www.travelweek.ca/?p=196098) |
+    | Air Canada per passenger | ≈ US$28.54 | [IdeaWorks / Toronto Star](https://ideaworkscompany.com/air-canada-trails-global-peers-in-fee-revenue-but-aeroplan-poised-to-boost-it/) |
+    | US large carriers' share (2025) | United 19.5%, Delta 18.6%, American 17.7%, Southwest 27.8%, Alaska 22.6% | [Travelweek](https://www.travelweek.ca/?p=196098) |
+    | Best in the world per passenger (2025) | Jet2.com US$100.73 | IdeaWorks 2026 Yearbook, via [CAPA](https://centreforaviation.com/analysis/reports/ancillary-revenue-is-no-longer-ancillary-to-the-airline-business-754588) |
+    | Industry growth (2025) | Ancillary +13.4% vs total revenue +7.2%; per passenger +10.7% | [CAPA](https://centreforaviation.com/analysis/reports/ancillary-revenue-is-no-longer-ancillary-to-the-airline-business-754588) |
+    | US checked-bag fees | US$7.27B in 2024, a record (BTS) | [ConsumerAffairs](https://www.consumeraffairs.com/news/airline-passengers-paid-727-billion-to-check-bags-in-2024-060525.html) |
+    | Bag behaviour | 66% prefer carry-on for domestic flights (≈34% check); about 50/50 for international | [Cheapflights survey, via TravelDailyNews](https://www.traveldailynews.com/?p=173008) |
+    | Seat willingness to pay | ≈60% of US travellers would pay to choose a seat; average US$33.59 | [UpgradedPoints](https://upgradedpoints.com/news/ultimate-airplane-seat-survey/) |
+    | Seat purchases (India, 2024) | 65% paid for a seat at least once in 12 months | [LocalCircles, via Business Today](https://www.businesstoday.in/amp/india/story/is-your-airline-taking-you-on-a-ride-over-seats-heres-what-a-survey-found-423315-2024-03-28) |
+    | Bundle buy-up | Frontier: 35% of passengers shown branded fares chose above the lowest; best with 3 tiers and a small first step (~$25). 2013–17, one airline | [Reuters Events](https://www.reutersevents.com/travel/node/56686) |
+
+    Our FY25-26 baseline: 187,718 tickets; $3.36M of paid extras ≈ $17.91 per ticket (1.7% of revenue). Take rates: bags 24.0% at $47.50, food 14.9% at $17.61, seats 6.7% at $58.13.
+

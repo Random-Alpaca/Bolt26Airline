@@ -37,7 +37,7 @@ Nothing from this session is committed yet. `slides/`, `HANDOFF.md`, `analysis/a
 
 1. **What happened.**
    - Revenue $180.6M → $190.0M (+5.2%). Flight costs $193.0M → $238.4M (+23.5%).
-   - Contribution before gates went from −$12.4M to **−$48.4M**, and is about −$58.3M after gates.
+   - Contribution before gates went from −$12.4M to **−$48.4M**, and is **−$58.4M after gates** (fiscal-year gate accrual $10.02M, see Q5 below).
    - The case's "~$40M" figure is our number with refunds excluded (−$40.5M).
    - Monthly margin was positive through Feb 2025 and negative every month from Mar 2025.
 2. **Root cause.** Since Mar 2025 a **second rotation per operating day** has been flown on 10 trunk directions: YUL↔YVR, YHZ↔YYZ, YUL↔YYZ, YOW↔YYZ and YHZ↔YUL.
@@ -48,7 +48,7 @@ Nothing from this session is committed yet. `slides/`, `HANDOFF.md`, `analysis/a
 3. **Cost growth.** Of the +$45.4M, **about ⅔ is volume and mix ($30.1M)** and **⅓ is like-for-like cost per flight +7.1% ($15.3M)**.
    - Like-for-like means the same route and the same calendar month.
    - Fuel +8.7% and crew +8.5% like-for-like. The case's 3%/4% are network averages diluted by the cheap new routes.
-   - The inflation was a one-time step and has been flat for about 12 months.
+   - Unit costs rose ~13–14% in monthly steps Jan–Jul 2025 on every route, then flat (not a single step). Like-for-like: fuel +$6.5M (+8.7%), crew +$5.7M (+8.5%), maintenance +$3.1M (+4.7%), food ~0; total $15.25M (shows as $15.2M).
 4. **The 3 new markets** (YOW↔YUL, YXU↔YYZ, YQM↔YHZ): revenue $5.0M against cost $15.2M. Cost coverage has been stuck at 32–34% for 12 months.
 5. **Network.**
    - Montréal–Vancouver loses −$19.7M with 0 connecting passengers.
@@ -57,27 +57,26 @@ Nothing from this session is committed yet. `slides/`, `HANDOFF.md`, `analysis/a
 6. **Revenue side.**
    - Ancillaries are about 2% of revenue; +10% ≈ $0.4M.
    - Refunds rose from $6.7M to $7.8M.
-   - OTA refund burden is 5.9% vs about 3.8% for direct channels.
-   - **St. John's** routes refund 37–39% of revenue in winter. This is a disruption problem, not weak demand, and it is not an "Atlantic" problem.
+   - OTA refund burden is 5.8% vs 3.7% for direct channels (on gross revenue).
+   - **St. John's** routes refund about 37% of revenue in winter (Dec–Feb, 36–39% depending on the measure). This is a disruption problem, not weak demand, and it is not an "Atlantic" problem.
    - Rewards tiers show no revenue premium.
 
 ## Alternatives & decision matrix (from `analysis/alternatives.py`)
 
 | | Stay the Course | Fill the Planes | **Right-Size & Recover** | Shrink to Core |
 |---|:-:|:-:|:-:|:-:|
-| Gain, central | $0 | +$5.3M | **+$60.7M** | +$52.1M |
-| After gates, central (range) | −$58.3M | −$53.0M (−$55.8 to −$28.2) | **+$2.4M** (−$16.1 to +$7.0) | −$3.3M |
+| Gain, central | $0 | +$5.3M | **+$59.8M** | +$52.1M |
+| After gates, central (range) | −$58.4M | −$53.1M (−$55.9 to −$28.3) | **+$1.4M** (−$16.9 to +$5.7) | −$3.4M |
 | Airports / connecting revenue lost | 20 / $0 | 20 / $0 | **20 / $0** | 14 / $8.1M |
-| Flights removed | 0 | 0 | 4,352 (28%) | 8,748 (56%) |
+| Flights removed | 0 | 0 | 4,296 (27%) | 8,748 (56%) |
 | Weighted score | 1.9 | 2.1 | **4.3** | 2.8 |
 
-- **Weights:** Financial 30 (linear: −$58.3M = 1, break-even = 5), Evidence & reversibility 15, Speed 10, Communities 15, Customers 15, Employees 15. **Safety is a pass/fail screen.**
-- **Shrink only wins if Financial is weighted at 71% or more**, and only if Right-Size gets 0% recapture.
+- **Weights:** Financial 30 (linear: −$58.4M = 1, break-even = 5), Evidence & reversibility 15, Speed 10, Communities 15, Customers 15, Employees 15. **Safety is a pass/fail screen.**
+- **Shrink only wins if Financial is weighted at 70% or more**, and only if Right-Size gets 0% recapture. Right-Size beats Shrink after gates once ≥60% of the trunk revenue moves to the kept flights.
 - **Right-Size & Recover, schedule part:**
   - Remove the added rotations on 8 trunk directions: +$28.5M central.
   - Exit Montréal–Vancouver: +$19.7M.
   - Halve the 3 new markets: +$6.4M.
-  - Halve Dec–Feb flights on Whitehorse/St. John's: +$0.9M (see decision 1 below).
 - **Right-Size & Recover, revenue recovery levers** ($2.2M–8.3M, central about $5.2M, not additive at the high end):
   - restore trunk yield ($0.3–1.8M);
   - rebook-first for St. John's disruptions ($0.4–1.1M);
@@ -101,34 +100,36 @@ Nothing from this session is committed yet. `slides/`, `HANDOFF.md`, `analysis/a
 - "−0.9 price elasticity" → describe it as the observed ratio: fares −11% and tickets +11% vs the control routes, so revenue was flat.
 - "$24–47M saving, $47M central" → $47M is the top of the range. With spill it is $43–46M. The $24M is a separate risk: 0% recapture, or partly fixed costs.
 - "Keeping the PM flight protects $4M of connections" → not supported. Those flows existed before the PM flight.
-- Ancillary ceiling: if every passenger bought a bag, seat and food, it covers **39%** of the gap, not 38%.
+- Ancillary ceiling: if every ticket bought a bag, seat and food, the gain is **+$19.8M**: 34% of the −$58.4M gap after gates, or 41% before gates. The older "39%" mixed bases (gross $23.1M vs the after-gates gap). See `slides/OUTLINE.md`, "Rejecting Fill the Planes: ancillary evidence".
 - Fare drop was "uniform across tiers and payment methods" → only true **across channels** (−7.6% to −9.7%).
 - Ancillaries +10% = **$0.40M**, not $0.34M.
 
+## Key-issues re-verification (2026-10-14)
+
+All Slide 17 numbers were re-verified. Corrections and the non-overlapping Theme 1 table are in `slides/OUTLINE.md`, "Verification notes". The main points:
+- the −$29.0M covers 4 markets (Montréal–Toronto, Halifax–Toronto, Halifax–Montréal, Ottawa–Toronto). It is not the 8-direction set in `afternoon_findings.md`;
+- the fare drop is trunk-only, Sep–Feb;
+- the cost rise was a ramp from Jan to Jul 2025, not a single step;
+- **halving the new markets still loses about −$2.6M at 0.65 coverage**, so the 0.8 kill trigger in decision 3 fires immediately.
+
 ## Open decisions (team)
 
-1. **Drop the Whitehorse/St. John's winter halving?** Recommended: yes.
-   - It's worth only about $0.9M.
-   - St. John's winter flights are among the fullest.
-   - It hurts "Connecting Communities".
-   - Rebook-first addresses the refunds instead.
-   - Without it, the Right-Size central case is about +$1.5M after gates.
+1. ~~Drop the Whitehorse/St. John's winter halving?~~ **Decided 2026-10-15: dropped.** Removed from `alternatives.py`; Right-Size central is now +$1.52M after gates. Slides 17–18 are rebuilt by `slides/build_issues_alternatives.py`.
 2. **Re-add trigger.** A direction earns back its second rotation at about **2× its one-rotation load** sustained for 6 months, at control-trend fares. The draft "18–19 tickets per flight" trigger would fire immediately.
 3. **Kill trigger for the halved new markets**, e.g. exit if revenue/cost stays below 0.8 by Q4 FY26-27. Full exit is worth $10.3M vs $5.1–7.6M for halving.
-4. Issues / Recs / Implementation / Risks slides: the user asked to leave these as placeholders until told otherwise. The alternatives work was explicitly requested.
+4. Issues slide is drafted in `slides/OUTLINE.md` ("Slide 17: Key issues"). Recs / Implementation / Risks slides: the user asked to leave these as placeholders until told otherwise. The alternatives work was explicitly requested.
 
 ## Still to do before submission
 
-- [ ] **Gates (Q5):**
-  - estimate the 2026-27 leases by airport;
-  - pro-rate the calendar-year leases onto fiscal years;
-  - allocate per the case rule (airport total ÷ departing flights).
-  - Then replace the `GATES` placeholder in `alternatives.py`; currently it's the 2025-26 lease total.
+- [x] **Gates (Q5), done 2026-10-15** (`analysis/alternatives.py`; matches the teammate repo to the cent):
+  - Lease years: $9.664M (2024) → $9.878M (2025), +2.2%. Calendar 2026 estimated at **$10.096M** (each gate repeats its 2024→25 % increase; flat-rate floor $9.878M).
+  - Fiscal-year accrual: FY24-25 $9.807M, **FY25-26 $10.023M** (4/12 of the 2025 lease + 8/12 of the 2026 estimate). After gates: **−$58.4M**.
+  - Per-airport allocation (airport total ÷ departing flights) is on the gates slide (`slides/build_gates.py`).
 - [ ] **Update the deck:**
   - slide 8 headline → ⅔ volume / ⅓ cost per flight;
   - slide 11 → trunk before/after chart, the key evidence;
   - Alternatives slide → the decision matrix;
-  - Recommendation → bridge from −$58.3M through Right-Size, the levers and gates, to positive.
+  - Recommendation → bridge from −$58.4M through Right-Size, the levers and gates, to positive.
 - [ ] **Rejection slide for Fill the Planes:** chart of each revenue lever's ceiling vs the gap.
 - [ ] **Commit** this session's files.
 - [ ] Optional appendix: Rewards cost via outside benchmarks. This is allowed if cited and labelled as an assumption; the organizers' contact is developer@boltubc.com.
@@ -144,14 +145,15 @@ Nothing from this session is committed yet. `slides/`, `HANDOFF.md`, `analysis/a
   - Quote the range. Even the downside (~$25M) dwarfs any revenue lever.
 - **"Business travellers need the PM flight."**
   - Corporate share of trunk tickets stayed flat (19.3%).
-  - Corporate fares fell the most (−9.7%).
+  - Corporate trunk fares fell in line with the other channels (−8.2% like-for-like). The raw −9.7% comes from route mix, so don't say "fell the most".
   - The data can't see contracts; concede that.
 - **"Shrink has the more certain number."**
   - The financial results are within about $6M.
   - Shrink costs 6 airports, $8M of connecting revenue, and 56% of flights.
   - "Shrink cuts markets; the data says the problem was frequency."
 - **"Does it meet 'sustainable profit'?"**
-  - Right-Size alone is about −$3M after gates. With the recovery levers it is about +$2.4M.
+  - The schedule changes alone get to about −$3.8M after gates. With the recovery levers (~$5.2M central) it is about +$1.4M, i.e. break-even, not a margin.
+  - It is contribution after gates: aircraft ownership and overhead are not in the data.
   - Quote the range honestly.
 
 ## Agent outputs (raw, for reference)

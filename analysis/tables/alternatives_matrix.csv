@@ -2,10 +2,9 @@ alternative,component,flights_removed,low_musd,central_musd,high_musd,connecting
 Right-Size & Recover,"Remove 2025 added rotations, 8 trunk directions",2265,14.49,28.49,28.49,0.0,,,,,,
 Right-Size & Recover,Exit Montreal-Vancouver (0 connecting bookings),620,19.71,19.71,19.71,0.0,,,,,,
 Right-Size & Recover,Halve frequency on 3 spring-2025 markets,1411,5.12,6.37,7.61,0.0,,,,,,
-Right-Size & Recover,"Halve Dec-Feb flights, Whitehorse & St. John's",56,0.62,0.88,1.15,0.0,,,,,,
 Shrink to Core,Exit 22 directions negative in every season,8748,52.13,52.13,52.13,8.05,,,,,,
 Right-Size & Recover,Revenue recovery levers (short term),0,2.2,5.2,8.3,0,,,,,,
-Stay the Course,TOTAL,0,0,0,0,0,20,0.0,-48.38,-58.25,-58.25,-58.25
-Fill the Planes,TOTAL,0,2.5,5.3,30.1,0,20,0.0,-43.08,-55.75,-52.95,-28.15
-Right-Size & Recover,TOTAL,4352,42.14,60.65,65.26,0.0,20,0.0,12.27,-16.11,2.4,7.01
-Shrink to Core,TOTAL,8748,52.13,52.13,52.13,8.05,14,2.78,3.75,-3.34,-3.34,-3.34
+Stay the Course,TOTAL,0,0,0,0,0,20,0.0,-48.38,-58.4,-58.4,-58.4
+Fill the Planes,TOTAL,0,2.5,5.3,30.1,0,20,0.0,-43.08,-55.9,-53.1,-28.3
+Right-Size & Recover,TOTAL,4296,41.52,59.77,64.11,0.0,20,0.0,11.39,-16.88,1.37,5.71
+Shrink to Core,TOTAL,8748,52.13,52.13,52.13,8.05,14,2.84,3.75,-3.43,-3.43,-3.43

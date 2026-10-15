@@ -46,5 +46,9 @@ The afternoon schedule grew by 1,972 flights, which is **74% of all flights adde
 
 ## Limits
 
+- **Assumption: `Cost_Date` is the departure time.** The data dictionary says only *"the date and time of the flight."* We read it as departure because:
+  - each route repeats the same fixed clock slots;
+  - the times fall into two groups, 06:30–08:00 and 12:00–18:10, with nothing in between. Any cutoff from 08:01 to 12:00 gives the same split.
+  - If the stamp were the arrival time instead, the slots would shift by the flight length but the two groups would remain. So the classes and the March 2025 step would not change.
 - No seat counts and no flight-level revenue. AM and PM loads cannot be compared directly.
 - The flex-schedule upside is not sized. Sizing it needs a peak-day demand estimate we don't have. Present it as a lower-risk way back, not as a dollar figure.

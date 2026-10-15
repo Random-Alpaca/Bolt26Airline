@@ -18,14 +18,11 @@ TRUNK = {"YUL-YVR", "YVR-YUL", "YHZ-YYZ", "YYZ-YHZ", "YUL-YYZ", "YYZ-YUL",
          "YOW-YYZ", "YYZ-YOW", "YHZ-YUL", "YUL-YHZ"}
 MTL_YVR = {"YUL-YVR", "YVR-YUL"}
 NEW = {"YOW-YUL", "YUL-YOW", "YXU-YYZ", "YYZ-YXU", "YQM-YHZ", "YHZ-YQM"}
-SEASONAL = {"YVR-YXY", "YXY-YVR", "YYZ-YYT", "YYT-YYZ", "YHZ-YYT", "YYT-YHZ"}
 ALL_SEASON_LOSS = {  # negative contribution in all four FY25-26 seasons
     "YEG-YZF", "YHZ-YQM", "YHZ-YUL", "YHZ-YYZ", "YOW-YUL", "YOW-YYZ", "YQM-YHZ",
     "YUL-YHZ", "YUL-YOW", "YUL-YVR", "YUL-YYZ", "YVR-YUL", "YVR-YXS", "YXS-YVR",
     "YXU-YYZ", "YXX-YYC", "YYC-YXX", "YYZ-YHZ", "YYZ-YOW", "YYZ-YUL", "YYZ-YXU", "YZF-YEG"}
-WINTER = {"12", "01", "02"}
 PRE = {"2024-09", "2024-10", "2024-11", "2024-12", "2025-01", "2025-02"}
-GATES = 9_877_700  # 2025-26 lease total, each physical gate counted once (placeholder until FY pro-rating)
 
 # ---- flights (cost events) and revenue, FY25-26
 flights = collections.defaultdict(list)          # route -> [(month, hh:mm, cost_cents)]
@@ -37,14 +34,11 @@ for date, month, period, route, cents in db.execute(
     if period == 2:
         flights[route].append((month, date[11:16], cents))
 rev = collections.Counter()
-winter_rev = collections.Counter()
 legs = collections.defaultdict(lambda: collections.Counter())  # booking -> route -> cents
 ticket_routes = collections.defaultdict(set)
 for booking, route, month, ttype, cents in db.execute(
         "select booking_id, route, month, type, amount_cents from transactions where period = 2"):
     rev[route] += cents
-    if month[5:] in WINTER:
-        winter_rev[route] += cents
     legs[booking][route] += cents
     if ttype == "Ticket":
         ticket_routes[booking].add(route)
@@ -64,15 +58,14 @@ def connecting_loss(exited):
     return lost
 
 
-def trim(routes, keep, winter_only=False):
+def trim(routes, keep):
     """Remove flights where keep(month, time) is False. Returns (cost_saved, rev_at_risk, n_removed).
-    Revenue at risk = removed share of the route's flights in the same window (year, or Dec-Feb)."""
+    Revenue at risk = removed share of the route's flights."""
     saved = risk = n = 0
     for r in routes:
         gone = [c for m, t, c in flights[r] if not keep(r, m, t)]
         saved += sum(gone)
-        pool = [f for f in flights[r] if f[0][5:] in WINTER] if winter_only else flights[r]
-        risk += (winter_rev[r] if winter_only else rev[r]) * len(gone) / len(pool)
+        risk += rev[r] * len(gone) / len(flights[r])
         n += len(gone)
     return saved, risk, n
 
@@ -104,26 +97,27 @@ alt_half = collections.Counter()
 half = lambda rt: (alt_half.update([rt]) or alt_half[rt]) % 2 == 1  # keep every other flight
 s, r, n = trim(NEW, lambda rt, m, t: half(rt))
 add(RS, "Halve frequency on 3 spring-2025 markets", s, r, n, (0, .5, 1))  # no pre-expansion history
-alt_half.clear()
-s, r, n = trim(SEASONAL, lambda rt, m, t: m[5:] not in WINTER or half(rt), winter_only=True)
-add(RS, "Halve Dec-Feb flights, Whitehorse & St. John's", s, r, n, (0, .25, .5))
+# Winter halving on Whitehorse & St. John's dropped (team, 2026-10-15): ~$0.9M, hurts communities, rebook-first covers refunds.
 s, r, n, conn = exit_(ALL_SEASON_LOSS)
 add(SH, "Exit 22 directions negative in every season", s, r, n, conn=conn)
 
-# Gate leases: the same rule for every option. Steady state (from the Jan 2027 renewal), a gate is
-# released only when no remaining route departs from it. ponytail: 2025-26 lease total stands in for
-# FY pro-rating + the 2026-27 estimate (Q5); swap GATES when that lands.
+# Gate leases: the same rule for every option. Leases run Jan-Jan, so FY25-26 (Sep-Aug) = 4/12 of the
+# calendar-2025 lease + 8/12 of calendar 2026, whose records are missing: each gate repeats its 2024->25
+# % increase (Q5). Gives $10.096M for 2026 and $10.023M for FY25-26 (teammate repo agrees to the cent).
+# Steady state (from the Jan 2027 renewal), a gate is released only when no remaining route departs from it.
 gate_routes = collections.defaultdict(set)
-gate_cost = {}
-for city, gate, route, cents in db.execute(
-        "select city, gate, route, amount_cents from gates where year = '2025-2026'"):
+gate_cost = {}  # (city, gate) -> {lease year: cents}; the file repeats a gate's cost on every route row
+for city, gate, year, route, cents in db.execute("select city, gate, year, route, amount_cents from gates"):
     gate_routes[(city, gate)].add(route or "")
-    gate_cost[(city, gate)] = cents
-assert abs(sum(gate_cost.values()) / 100 - GATES) < 1
+    gate_cost.setdefault((city, gate), {})[year] = cents
+L25 = {g: c["2025-2026"] for g, c in gate_cost.items()}
+L26 = {g: c["2025-2026"] ** 2 / c["2024-2025"] for g, c in gate_cost.items()}
+GATES = (sum(L25.values()) * 4 / 12 + sum(L26.values()) * 8 / 12) / 100  # FY25-26 accrual, dollars
+assert round(sum(L25.values())) == 987_770_000 and abs(GATES - 10_023_129) < 1, GATES
 
 
 def gates_released(exited):
-    return sum(c for g, c in gate_cost.items() if "" not in gate_routes[g] and gate_routes[g] <= exited) / 1e8
+    return sum(c for g, c in L26.items() if "" not in gate_routes[g] and gate_routes[g] <= exited) / 1e8
 
 
 # A. Fill the Planes: verified revenue-lever stack (low, central, ceiling), excluding ~$7.6M organic
