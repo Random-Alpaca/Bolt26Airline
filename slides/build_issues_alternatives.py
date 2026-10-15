@@ -85,6 +85,7 @@ def build_issues(s):
     cd.add_series("Contribution", [round(v, 1) for v in vals])
     gf = s.shapes.add_chart(XL_CHART_TYPE.BAR_CLUSTERED, Inches(0.7), Inches(2.72), Inches(4.35), Inches(3.0), cd)
     ch = gf.chart
+    ch.has_title = False  # PowerPoint would otherwise title a one-series chart with the series name
     ch.has_legend = False
     ch.font.name, ch.font.size, ch.font.color.rgb = BODY, Pt(10), INK
     plot = ch.plots[0]
@@ -117,7 +118,7 @@ def build_issues(s):
          "10 trunk directions, Sep–Feb: flights +101%, revenue +3.1% (other routes +4.0%), tickets/flight −44%. "
          "Montréal–Vancouver lost money all year. New markets cover a third of cost.",
          "→ Fix: right-size the schedule; re-add flights only on proven demand"),
-        ("2", "Each flight earns less and costs more", "$15.2M", "cost rise, same route & month (⅓ of growth)",
+        ("2", "Each flight earns less and costs more", "$15.3M", "cost rise, same route & month (⅓ of growth)",
          "Per flight, same route & month: fuel +8.7%, crew +8.5%, rising Jan–Jul 2025. Trunk fares −8% "
          "(Sep–Feb): extra seats sold only at lower fares. Refunds $6.7M → $7.8M.",
          "→ Fix: restore trunk fares, rebook-first for disruptions, shift OTA bookings to direct"),
@@ -161,7 +162,7 @@ Say: "Record revenue, but a loss nearly four times last year's. Three issues exp
 1. Capacity outran demand. The chart is the whole story: the 16 directions NorthByte added or doubled in 2025 lose about $59M; the other 38 still make +$10.6M (about +$5M after gates) and were profitable in all 24 months. That answers Q2: the rest of the network still earns, but covers only about a fifth of the expansion's −$59M.
    The 4 doubled trunk markets are Montréal–Toronto, Halifax–Toronto, Halifax–Montréal and Ottawa–Toronto. Name them; do not say "8 directions" without naming them (afternoon_findings uses a different 8).
    The staggered rollout is strongly consistent with cause and effect: each group's fare fell ~10% against control routes in the exact month its flights doubled (purchase-month revenue, so say "consistent with", not "proves").
-2. Each flight earns less and costs more. Per flight on the same route and month, fuel +8.7% and crew +8.5% ($12.2M together); with maintenance (+4.7%, $3.1M) all cost lines rose $15.2M on that basis ($12.3M on identical flights), rising Jan–Jul 2025 on every route, then flat. If asked "what about maintenance +$13.0M?": mostly volume; only $3.1M is per-flight, and it falls with the flights Right-Size removes. By cost line fuel+crew are $31.2M of the decline; by cause, $19.0M of that is flying more and $12.2M is higher cost per flight. Trunk fares fell ~8% Sep–Feb. Do NOT add issue 2 to issue 1: about $6.5M of the cost rise is already inside issue 1's route losses.
+2. Each flight earns less and costs more. Per flight on the same route and month, fuel +8.7% and crew +8.5% ($12.2M together); with maintenance (+4.7%, $3.1M) all cost lines rose $15.3M on that basis ($15.25M, rounded so ⅔ + ⅓ add to $45.4M) ($12.3M on identical flights), rising Jan–Jul 2025 on every route, then flat. If asked "what about maintenance +$13.0M?": mostly volume; only $3.1M is per-flight, and it falls with the flights Right-Size removes. By cost line fuel+crew are $31.2M of the decline; by cause, $19.0M of that is flying more and $12.2M is higher cost per flight. Trunk fares fell ~8% Sep–Feb. Do NOT add issue 2 to issue 1: about $6.5M of the cost rise is already inside issue 1's route losses.
 3. Root cause: costs were reviewed company-wide, by category (case p.10). The routes later doubled already had a 5.4% margin vs 12.3% elsewhere, and 8,051 of 8,183 Mar–Aug 2026 flights repeat 2025 exactly. "Nobody reviewed it" is our inference from that; say so if asked.
 Close with the strip: Five Forces explains why frequency was the wrong bet (competitor response is our inference; the data only shows NorthByte's own fares). Ancillaries, gates and seasonality are each an order of magnitude smaller; Rewards' cost isn't in the data, so we don't size it.
 If asked "is it ALL the expansion?": no. The 16 added directions explain ~90% of the decline (the 10 doubled trunk directions alone 78%); the other 38 directions also slipped $3.4M (+$14.0M → +$10.6M) on the per-flight cost step, and 12 of them lose money individually.

@@ -11,30 +11,38 @@ Template: [NorthByte_FirstByte2026_template.pptx](NorthByte_FirstByte2026_templa
 
 | # | Slide | Guiding Q | Time | Status |
 |---|---|---|---|---|
-| 1 | Title | | 0:15 | Team name |
-| 2 | Executive summary | all | 0:45 | Findings drafted; recs box empty |
-| 3 | Situation & key question | | 0:40 | Drafted |
-| 4 | Data & approach | | 0:40 | Drafted; gate step needs redo |
+| 1 | Title | | 0:15 | **Team name still needed** |
+| 2 | Executive summary | all | 0:45 | Built (`build_copyfix.py`) |
+| 3 | Situation & key question | | 0:40 | Built (`build_copyfix.py`) |
+| 4 | Data & approach | | 0:40 | Drafted (template text) |
 | 5 | *Divider: What happened* | | | Optional |
-| 6 | What changed: revenue vs cost bridge | Q1 | 0:50 | Drafted |
+| 6 | What changed: revenue vs cost bridge | Q1 | 0:50 | Built (`build_copyfix.py`) |
 | 7 | When it turned: monthly margin | Q1 | 0:50 | Drafted |
-| 8 | Why costs rose: volume vs price | Q1, Q3 | 1:00 | Drafted (key insight) |
+| 8 | Why costs rose: ⅔ volume & mix / ⅓ cost per flight | Q1, Q3 | 1:00 | Built (`build_costs.py`) |
 | 9 | *Divider: Where money is lost* | | | Optional |
-| 10 | Network: route/market P&L | Q2 | 1:00 | Drafted; redo after gates |
-| 11 | The expansion: new routes vs added frequency | Q1, Q2 | 0:45 | **Analysis needed** |
+| 10 | Network: route/market P&L | Q2 | 1:00 | Built (`build_copyfix.py`) |
+| 11 | The expansion: doubled trunk vs new markets | Q1, Q2 | 0:45 | Built (`build_expansion.py`) |
 | 12 | *Divider: What else matters* | | | Optional |
-| 13 | Refunds, Rewards, ancillaries, connections | Q3, Q4 | 1:00 | Partial; **analysis needed** |
-| 14 | Gate leases + 2026-27 estimate | Q5 | 0:45 | **Analysis needed** |
-| 15 | Root-cause synthesis (driver ranking) | Q3 | 0:30 | Placeholder |
-| 16 | *Divider: What NorthByte should do* | | | Optional |
-| 17 | Key issues | | 0:40 | **Built** (`build_issues_alternatives.py`); not yet visually checked |
-| 18 | Alternatives (scoring matrix) | | 0:45 | **Built** (`build_issues_alternatives.py`); not yet visually checked |
-| 19 | Recommendation: short/long term + stakeholder effects | Q6 | 1:15 | **Placeholder** |
-| 20 | Implementation roadmap + KPIs | | 0:45 | **Placeholder** |
-| 21 | Risks & mitigation | | 0:30 | **Placeholder** |
-| 22 | Thank you | | | |
-| 23–27 | Appendix: cleaning, heatmap, sensitivity, channels | | Q&A | Drafted |
-| 28 | Appendix: Strategic lens (Five Forces + SWOT) | | Q&A | **Built**; not yet visually checked |
+| 13 | Revenue levers: factor ranking vs the −$36M decline | Q3, Q4 | 1:00 | Built (`build_levers.py`) |
+| 14 | Gate leases + 2026-27 estimate | Q5 | 0:45 | Built (`build_gates.py`) |
+| 15 | *Divider: What NorthByte should do* | | | Optional |
+| 16 | Key issues | | 0:40 | Built (`build_issues_alternatives.py`) |
+| 17 | Alternatives (scoring matrix) | | 0:45 | Built (`build_issues_alternatives.py`) |
+| 18 | Recommendation: short/long term + stakeholder effects | Q6 | 1:15 | **Teammate** |
+| 19 | Implementation roadmap + KPIs | | 0:45 | **Teammate** |
+| 20 | Risks & mitigation | | 0:30 | **Teammate** |
+| 21 | Thank you | | | Built (`build_copyfix.py`) |
+| 22–26 | Appendix: cleaning, heatmap, sensitivity, channels | | Q&A | Drafted; A1 built |
+| 27 | Appendix: Strategic lens (Five Forces + SWOT) | | Q&A | Built (`build_issues_alternatives.py`) |
+
+The old "Root cause" slide was removed by `slides/finalize.py`; Key issues covers it.
+
+**Rebuild the deck** (from the repo root; each builder finds its slide by kicker text and is safe to rerun):
+```
+for b in build_costs build_expansion build_levers build_gates build_copyfix build_issues_alternatives finalize; do uv run -q --no-project --with python-pptx --with lxml --with pillow python slides/$b.py; done
+uv run -q --no-project --with python-pptx --with pillow python slides/check_fit.py
+```
+Not yet checked in a real renderer: PowerPoint export hung on this machine. Open the deck in PowerPoint or Google Slides and look at every built slide before exporting the PDF.
 
 That's about 12:45 as drafted, roughly 3 minutes over. Delete the dividers, merge slides 3 and 4, and fold slide 15 into slide 17 to land at 10.
 

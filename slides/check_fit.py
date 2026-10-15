@@ -1,25 +1,40 @@
 """Flag text that likely overflows its box or table cell (no renderer needed).
 
-uv run --no-project --with python-pptx python slides/check_fit.py [deck.pptx] [slide numbers, e.g. 17,18]
-ponytail: average glyph widths (Lato ~0.50 em, bold ~0.53, Montserrat bold ~0.63), so it is a heuristic with
-~10% error; anything within 10% of the limit is reported as TIGHT. A real render is still the final check.
+uv run --no-project --with python-pptx --with pillow python slides/check_fit.py [deck.pptx] [slide numbers, e.g. 17,18]
+ponytail: real Lato metrics (font files from the local R install), average glyph widths for Montserrat (~0.63 em
+bold), so it is a heuristic with ~5-10% error; anything within 10% of the limit is reported as TIGHT. A real render is still the final check.
 """
 import math
 import sys
 
 from pptx import Presentation
-from pptx.enum.text import MSO_AUTO_SIZE
 from pptx.util import Emu
 
 from deckkit import DECK
 
 EM = {("Montserrat", True): 0.63, ("Montserrat", False): 0.58, ("Lato", True): 0.53, ("Lato", False): 0.50}
+# Real Lato metrics when the font files exist (Montserrat is not installed here, so it keeps the estimate)
+LATO_DIR = "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/rmarkdown/rmd/h/bootstrap/css/fonts"
+try:
+    from PIL import ImageFont
+    FONTS = {("Lato", False): ImageFont.truetype(f"{LATO_DIR}/Lato.ttf", 1000),
+             ("Lato", True): ImageFont.truetype(f"{LATO_DIR}/LatoBold.ttf", 1000)}
+except Exception:
+    FONTS = {}
+
+
+def width(txt, font, bold, pt):
+    f = FONTS.get((font or "Lato", bool(bold)))
+    if f:
+        return f.getlength(txt) / 1000 * pt / 72
+    return len(txt) * EM.get((font or "Lato", bool(bold)), 0.52) * pt / 72
 
 
 def need_height(tf, width_in):
     """Estimated height (in) of a text frame's paragraphs wrapped at width_in."""
     total = 0.0
-    for p in tf.paragraphs:
+    paras = list(tf.paragraphs)
+    for idx, p in enumerate(paras):
         runs = p.runs
         size = max((r.font.size.pt for r in runs if r.font.size), default=12)
         if not "".join(r.text for r in runs).strip():
@@ -28,15 +43,14 @@ def need_height(tf, width_in):
         line_w, lines = 0.0, 1
         for r in runs:
             pt = r.font.size.pt if r.font.size else size
-            em = EM.get((r.font.name or "Lato", bool(r.font.bold)), 0.52)
             for i, word in enumerate(r.text.split(" ")):
-                w = (len(word) + (1 if i or line_w else 0)) * em * pt / 72
+                w = width((" " if i or line_w else "") + word, r.font.name, r.font.bold, pt)
                 if line_w + w > width_in and line_w > 0:
                     lines += 1 + math.floor(w / width_in)
                     line_w = w % width_in
                 else:
                     line_w += w
-        total += lines * size * 1.2 / 72 + (p.space_after.pt / 72 if p.space_after else 0)
+        total += lines * size * 1.2 / 72 + (p.space_after.pt / 72 if p.space_after and idx < len(paras) - 1 else 0)
     return total
 
 
@@ -65,10 +79,10 @@ def check(deck, only=None):
             for name, tf, w, h in frames:
                 mw, mh = margins(tf)
                 need, have = need_height(tf, w - mw) + mh, h
-                if tf.auto_size == MSO_AUTO_SIZE.SHAPE_TO_FIT_TEXT:  # template boxes grow; cap them by role
-                    have = {"TextBox 3": 1.05, "TextBox 5": 0.33}.get(name)  # title <= 2 lines, source 1 line
-                    if have is None:
-                        continue
+                if name in ("TextBox 2", "TextBox 6"):  # template kicker and page number grow to fit; one short line
+                    continue
+                if name in ("TextBox 3", "TextBox 5"):  # title <= 2 lines; source line 1 line (+6pt space-after)
+                    have = {"TextBox 3": 1.05, "TextBox 5": 0.33}[name]
                 if need > have * 1.1:
                     status = "OVERFLOW"
                 elif need > have * 0.95:

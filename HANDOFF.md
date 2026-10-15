@@ -18,6 +18,8 @@ Sources (outside this repo):
 | Deck template (27 slides, Google Slides-importable) | `slides/NorthByte_FirstByte2026_template.pptx` |
 | Slide outline + timing + analysis TODOs | `slides/OUTLINE.md` |
 | Draft charts | `analysis/charts/*.png` |
+| Slide builders (deck is generated, rerun after analysis changes) | `slides/build_*.py`, shared helpers `slides/deckkit.py`, `slides/finalize.py`, fit check `slides/check_fit.py`; how to rerun: `slides/OUTLINE.md` |
+| Cross-check vs teammate repo (vvictort/firstByte-2026) | `analysis/teammate_crosscheck.md` |
 | Afternoon-flight deep dive (flex vs paired PM flights, YOW↔YYZ midday) | `analysis/afternoon.py` → `analysis/afternoon_findings.md`, `charts/11_afternoon_flights.png` |
 
 Nothing from this session is committed yet. `slides/`, `HANDOFF.md`, `analysis/alternatives.py` and the two new tables are untracked.
@@ -48,7 +50,7 @@ Nothing from this session is committed yet. `slides/`, `HANDOFF.md`, `analysis/a
 3. **Cost growth.** Of the +$45.4M, **about ⅔ is volume and mix ($30.1M)** and **⅓ is like-for-like cost per flight +7.1% ($15.3M)**.
    - Like-for-like means the same route and the same calendar month.
    - Fuel +8.7% and crew +8.5% like-for-like. The case's 3%/4% are network averages diluted by the cheap new routes.
-   - Unit costs rose ~13–14% in monthly steps Jan–Jul 2025 on every route, then flat (not a single step). Like-for-like: fuel +$6.5M (+8.7%), crew +$5.7M (+8.5%), maintenance +$3.1M (+4.7%), food ~0; total $15.25M (shows as $15.2M).
+   - Unit costs rose ~13–14% in monthly steps Jan–Jul 2025 on every route, then flat (not a single step). Like-for-like: fuel +$6.5M (+8.7%), crew +$5.7M (+8.5%), maintenance +$3.1M (+4.7%), food ~0; total $15.25M (shown as $15.3M so the ⅔ + ⅓ split adds to $45.4M).
 4. **The 3 new markets** (YOW↔YUL, YXU↔YYZ, YQM↔YHZ): revenue $5.0M against cost $15.2M. Cost coverage has been stuck at 32–34% for 12 months.
 5. **Network.**
    - Montréal–Vancouver loses −$19.7M with 0 connecting passengers.

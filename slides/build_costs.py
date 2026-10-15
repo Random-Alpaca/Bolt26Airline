@@ -295,7 +295,7 @@ def build_costs(s):
          f"in 2025: 4 doubled trunk markets ${m1(GRP['trunk'])}M, Montréal–Vancouver ${m1(GRP['mtl'])}M, 3 new markets "
          f"${m1(GRP['new'])}M; other 38 {MINUS}${m1(-GRP['rest'])}M.",
          "→ Fix: right-size; recorded cost falls with each flight cut"),
-        ("2", f"${LFL_M}M", ORANGE, "each flight costs more: one-third",
+        ("2", f"${LFL_M}M", ORANGE, "costlier flights: one-third",
          f"Same route, same month: {pct(LFL_PCT)} per flight (fuel {pct(CAT['Fuel'][2])}, crew {pct(CAT['Crew'][2])}, "
          f"maintenance {pct(CAT['Maintenance'][2])}, food flat). Unit costs rose on every route in monthly steps "
          "from Jan to Jul 2025, then flattened.",

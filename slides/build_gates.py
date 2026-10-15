@@ -16,9 +16,9 @@ Method:
   Range: every gate at the smallest or largest observed rise (+1.3% / +2.6%): $10.01M to $10.13M. Frozen rates
   ($9.88M) are only a floor: all 34 gates rose.
 - Case rule: an airport's gate total is split evenly across all flights departing it (no arrival charge).
-  Per-departure figures use the 2025-26 lease total against FY25-26 departures, the same basis as the deck's
-  -$58.3M after gates. Pro-rating by fiscal month (4 months of the 2025-26 lease + 8 of the 2026-27 estimate)
-  gives $10.02M and about -$58.4M; that alternative is stated in the source line and notes.
+  FY25-26 gate cost is pro-rated by fiscal month (4 months of the 2025-26 lease + 8 of the 2026-27 estimate):
+  $10.02M, giving the deck's -$58.4M after gates (analysis/alternatives.py uses the same basis). Per-departure
+  figures use each airport's fiscal FY25-26 gate cost against its FY25-26 departures.
 """
 import sqlite3
 from decimal import Decimal
@@ -79,22 +79,24 @@ for (city, _), g in gates.items():
     a[Y25] += g[Y25] / 100
     a["est"] += g["est"] / 100
     a["idle"] += 0 if g["assigned"] else g[Y25] / 100
+    a["fiscal"] = a.get("fiscal", 0) + (g[Y25] * 4 / 12 + float(g["est"]) * 8 / 12) / 100  # FY25-26 accrual
+    a["idle_fiscal"] = a.get("idle_fiscal", 0) + (0 if g["assigned"] else (g[Y25] * 4 / 12 + float(g["est"]) * 8 / 12) / 100)
 dep = dict(db.execute("select origin, count(*) from (select route, date, origin from costs where period = 2 "
                       "group by route, date) group by origin"))
 DEPS = sum(dep.values())
 DEPS1 = db.execute("select count(*) from (select 1 from costs where period = 1 group by route, date)").fetchone()[0]
 assert set(dep) == set(airports) and DEPS == 15729 and DEPS1 == 13072
 for c, a in airports.items():
-    a["per_dep"] = a[Y25] / dep[c]
-    a["idle_per_dep"] = a["idle"] / dep[c]
-AVG = L25 / DEPS
+    a["per_dep"] = a["fiscal"] / dep[c]
+    a["idle_per_dep"] = a["idle_fiscal"] / dep[c]
+AVG = FY2_FISCAL / DEPS
 
 contrib = db.execute("select (select sum(amount_cents) from transactions where period = 2) - "
                      "(select sum(amount_cents) from costs where period = 2)").fetchone()[0] / 1e8  # $M
 cost1, cost2 = (db.execute("select sum(amount_cents) from costs where period = ?", (p,)).fetchone()[0] / 1e8
                 for p in (1, 2))
-AFTER = contrib - L25 / 1e6
-AFTER_FISCAL = contrib - FY2_FISCAL / 1e6
+AFTER_LEASE = contrib - L25 / 1e6  # if 2026 rates were frozen at 2025 levels (floor)
+AFTER = contrib - FY2_FISCAL / 1e6  # the deck's basis
 HUB_SHARE_UP = sum(airports[c][Y25] - airports[c][Y24] for c in HUBS) / (L25 - L24)
 HUB_LO, HUB_HI = (f(airports[c]["per_dep"] for c in HUBS) for f in (min, max))
 
@@ -103,10 +105,11 @@ assert (L24, L25, row_sum24) == (9_664_400, 9_877_700, 17_423_300)
 assert abs(LO26 - 10_008_846.29) < 1 and abs(HI26 - 10_134_802.18) < 1
 assert abs(E26 - 10_095_844.04) < 1 and abs(FY2_FISCAL - 10_023_129.36) < 1
 assert [f"{c} {gt}" for c, gt in IDLE] == ["Halifax A3", "Ottawa A2"] and IDLE25 == 433_500
-assert abs(contrib - -48.377) < 0.001 and money(AFTER) == f"{MINUS}58.3" and money(AFTER_FISCAL) == f"{MINUS}58.4"
+assert abs(contrib - -48.377) < 0.001 and money(AFTER) == f"{MINUS}58.4" and money(AFTER_LEASE) == f"{MINUS}58.3"
 assert abs((cost2 - cost1) - 45.39) < 0.01
 WORST = max(airports, key=lambda c: airports[c]["per_dep"])
-assert WORST == "Whitehorse" and round(airports[WORST]["per_dep"]) == 1931
+assert WORST == "Whitehorse" and round(airports[WORST]["per_dep"]) == 1951
+assert abs(sum(a["fiscal"] for a in airports.values()) - FY2_FISCAL) < 1
 
 
 def k(x):  # whole dollars -> "$1,931"
@@ -182,7 +185,7 @@ def per_dep_chart(s, x, y, w, h):
     cd = CategoryChartData()
     cd.categories = [r[0] for r in rows]
     cd.add_series("Gate cost per departure", [round(r[1], 2) for r in rows])
-    cd.add_series("of which idle gate", [round(r[2], 2) for r in rows])
+    cd.add_series("of which unassigned gate", [round(r[2], 2) for r in rows])
     gf = s.shapes.add_chart(XL_CHART_TYPE.BAR_CLUSTERED, Inches(x), Inches(y), Inches(w), Inches(h), cd)
     ch = gf.chart
     quiet(ch)
@@ -208,7 +211,7 @@ def per_dep_chart(s, x, y, w, h):
             pt.format.fill.solid()
             pt.format.fill.fore_color.rgb = MUTED
         if iv or nm.startswith("All ") or i == 0:
-            lab = (f"{k(v)} ({k(iv)} idle gate)" if iv else f"{k(v)} average" if nm.startswith("All ") else k(v))
+            lab = (f"{k(v)} ({k(iv)} unassigned)" if iv else f"{k(v)} average" if nm.startswith("All ") else k(v))
             tf = pt.data_label.text_frame
             tf.text = lab
             r = tf.paragraphs[0].runs[0]
@@ -238,8 +241,8 @@ def card(s, x, y, w, h, num, head, body):
 def build(s):
     reset(s, KICKER,
           f"Gate leases rose only 2.2%, to {m2(L25)}; expect about ${E26 / 1e6:.1f}M for the 2026-27 lease year",
-          f"Source: NorthByte gates, costs & transactions; team analysis. Pro-rated by fiscal month, FY25-26 gates = "
-          f"{m2(FY2_FISCAL)} (after gates ≈ {MINUS}$58.4M).",
+          f"Source: NorthByte gates, costs & transactions; team analysis. FY25-26 gates = {m2(FY2_FISCAL)}: "
+          f"Sep–Dec 2025 lease + Jan–Aug 2026 estimate.",
           NOTES)
     drop_orphan_charts(s)
     top, bot = 1.72, 6.05
@@ -261,7 +264,7 @@ def build(s):
     box(s, x2, top, w2, h, fill=PANEL)
     text(s, x2 + 0.15, top + 0.1, w2 - 0.3, 0.62, [
         [("Gate cost per departing flight", {"bold": True, "color": NAVY, "font": HEAD, "size": 12, "space_after": 2})],
-        [("FY25-26: airport's 2025-26 leases ÷ its departures", {"size": 10, "color": MUTED})],
+        [("FY25-26: airport's gate cost ÷ its departures", {"size": 10, "color": MUTED})],
         [("Orange: ", {"size": 10, "bold": True, "color": ORANGE}),
          ("gates with no routes assigned", {"size": 10, "color": MUTED})]], size=10)
     per_dep_chart(s, x2 + 0.05, top + 0.72, w2 - 0.1, h - 0.76)
@@ -281,8 +284,8 @@ def build(s):
          f"~{dep['Whitehorse'] / 52.18:.1f} departures a week. The fixed price of serving the North, not a reason "
          f"to cut."),
         (f"Loss after gates: {MINUS}${-AFTER:.1f}M",
-         f"{MINUS}${-contrib:.1f}M before gates less {m2(L25)} of 2025-26 leases. Gates stay when flights go: "
-         f"release the 2 idle gates (${IDLE25 / 1e6:.2f}M a year) at the Jan 2027 renewal."),
+         f"{MINUS}${-contrib:.1f}M less {m2(FY2_FISCAL)} of FY25-26 gates. Gates stay when flights go; "
+         f"release the 2 unassigned gates (${IDLE25 / 1e6:.2f}M/yr) in Jan 2027."),
     ]
     cg = 0.12
     heights = [0.98, 0.98, 0.98, h - 3 * 0.98 - 3 * cg]
@@ -306,11 +309,11 @@ NOTES = f"""GATE LEASES (guiding Q5). ~45 sec.
 Say: "Leadership asked about gates. They are a small, steady cost: {m2(L25)}, up 2.2%. Expect about ${E26 / 1e6:.1f}M for the 2026-27 leases."
 1. Change. Counting each physical gate once, leases went ${L24:,.0f} (2024-25 lease, calendar 2024) to ${L25:,.0f} (2025-26, calendar 2025): +${L25 - L24:,.0f}, +{(L25 / L24 - 1) * 100:.2f}%. Same 34 gates at 20 airports in both years; every gate rose {min(pct) * 100:.1f}% to {max(pct) * 100:.1f}%. The 4 hubs are {sum(airports[c][Y25] for c in HUBS) / L25:.0%} of the bill and {HUB_SHARE_UP:.0%} of the increase. Flight costs rose ${cost2 - cost1:.1f}M (FY24-25 to FY25-26); gates are about {L25 / (cost2 * 1e6 + L25):.0%} of FY25-26 recorded cost including gates. The raw file sums to ${row_sum24 / 1e6:.1f}M because a shared gate repeats on each route row.
 2. 2026-27 estimate (the lease from Jan 1, 2026 to Jan 1, 2027; its records were lost). Each gate repeats its own 2025 percentage increase: ${E26:,.0f} (+{(E26 / L25 - 1) * 100:.1f}%). Range: every gate at the smallest observed rise (+{min(pct) * 100:.1f}%) gives ${LO26:,.0f}; every gate at the largest (+{max(pct) * 100:.1f}%) gives ${HI26:,.0f}. Repeating each gate's dollar increase gives ${DOLLAR26:,.0f}. Frozen rates (${FLAT26:,.0f}) are only a floor: all 34 gates rose in 2025. So: expect ~${E26 / 1e6:.1f}M, range {m2(LO26)} to {m2(HI26)}. This is a scenario range, not a confidence interval. (FY26-27 itself spans 4 months of the 2026-27 lease and 8 of the 2027-28 lease.)
-3. Case rule: each airport's gate total is split evenly over every flight departing it (arrivals pay nothing). FY25-26 basis = 2025-26 lease total ÷ FY25-26 departures (same basis as the −$58.3M). Network ${AVG:,.0f} per departure ({DEPS:,} departures). Whitehorse ${airports['Whitehorse']['per_dep']:,.0f} ({dep['Whitehorse']} departures on one gate), Yellowknife ${airports['Yellowknife']['per_dep']:,.0f}, St. John's ${airports["St. John's"]['per_dep']:,.0f}; hubs ${HUB_LO:,.0f} (Toronto) to ${HUB_HI:,.0f} (Vancouver). Ottawa is lowest (${airports['Ottawa']['per_dep']:,.0f}) because Ottawa–Toronto was doubled and Ottawa–Montréal added ({dep['Ottawa']:,} departures). On the fiscal pro-rated basis the network figure is ${FY2_FISCAL / DEPS:,.0f}. A year earlier it was ${L24 / DEPS1:,.0f} ({DEPS1:,} FY24-25 departures): spreading a fixed cost over 20% more flights lowered gate cost per flight, but did not make those flights pay.
+3. Case rule: each airport's gate total is split evenly over every flight departing it (arrivals pay nothing). FY25-26 basis = each airport's fiscal gate cost (Sep–Dec 2025 lease + Jan–Aug 2026 estimate) ÷ its FY25-26 departures (same basis as the −$58.4M). Network ${AVG:,.0f} per departure ({DEPS:,} departures). Whitehorse ${airports['Whitehorse']['per_dep']:,.0f} ({dep['Whitehorse']} departures on one gate), Yellowknife ${airports['Yellowknife']['per_dep']:,.0f}, St. John's ${airports["St. John's"]['per_dep']:,.0f}; hubs ${HUB_LO:,.0f} (Toronto) to ${HUB_HI:,.0f} (Vancouver). Ottawa is lowest (${airports['Ottawa']['per_dep']:,.0f}) because Ottawa–Toronto was doubled and Ottawa–Montréal added ({dep['Ottawa']:,} departures). A year earlier it was ${L24 / DEPS1:,.0f} ({DEPS1:,} FY24-25 departures): spreading a fixed cost over 20% more flights lowered gate cost per flight, but did not make those flights pay.
    These are allocations of a fixed cost, not savings: the airports with the fewest departures per gate cost most per flight (Whitehorse {dep['Whitehorse']} and Yellowknife {dep['Yellowknife']} FY25-26 departures on one gate each), and they stay (all 20 airports are kept). Remoteness alone is not the driver: Abbotsford, Regina, Saskatoon, Winnipeg and Québec City also sit above Vancouver, while one-gate Kelowna, Victoria, London and Moncton are among the cheapest. If asked "why not drop Whitehorse's gate?": the gate is the price of serving that community, and only 2 of the 34 gates have no routes.
-4. Idle gates: Halifax A3 and Ottawa A2 have no route assigned in either year: ${IDLE24:,.0f} (2024-25), ${IDLE25:,.0f} (2025-26), ≈${IDLE26:,.0f} at 2026-27 estimated rates. They add ${airports['Halifax']['idle_per_dep']:,.0f} to each Halifax departure and ${airports['Ottawa']['idle_per_dep']:,.0f} to each Ottawa departure. "Unassigned" does not prove "unused" (backup, irregular operations), so station managers confirm before release at the Jan 2027 renewal (recommendation, no-regret move).
-5. Loss after gates: FY25-26 contribution −${-contrib:.2f}M minus the 2025-26 lease total {m2(L25)} = −${-AFTER:.2f}M, shown as −$58.3M across the deck. Pro-rating by fiscal month instead (Sep–Dec 2025 on the 2025-26 lease, Jan–Aug 2026 on the 2026-27 estimate) gives {m2(FY2_FISCAL)} of gates and −${-AFTER_FISCAL:.2f}M (≈ −$58.4M). The $0.15M gap changes no conclusion.
-   Why it matters: gates are fixed. Removing flights does not remove gate cost unless every route at a gate or airport goes. That is why issue sizes and the savings from cutting flights are stated before gates; each alternative's bottom line subtracts the same {m2(L25)}, less any gates it releases. Right-Size's flight cuts release none; Shrink to Core's {MINUS}$3.3M already credits the gates it frees (it closes 6 of 20 airports); a full exit of the new markets would free $0.69M. Only releasing a gate saves money.
+4. Unassigned gates: Halifax A3 and Ottawa A2 have no route assigned in either year: ${IDLE24:,.0f} (2024-25), ${IDLE25:,.0f} (2025-26), ≈${IDLE26:,.0f} at 2026-27 estimated rates. They add ${airports['Halifax']['idle_per_dep']:,.0f} to each Halifax departure and ${airports['Ottawa']['idle_per_dep']:,.0f} to each Ottawa departure. "Unassigned" does not prove "unused" (backup, irregular operations), so station managers confirm before release at the Jan 2027 renewal (recommendation, no-regret move).
+5. Loss after gates: FY25-26 contribution −${-contrib:.2f}M minus {m2(FY2_FISCAL)} of FY25-26 gates (Sep–Dec 2025 on the 2025-26 lease, Jan–Aug 2026 on the 2026-27 estimate) = −${-AFTER:.2f}M, shown as −$58.4M across the deck. Freezing 2026 at 2025 rates would give −${-AFTER_LEASE:.2f}M; the $0.15M gap changes no conclusion.
+   Why it matters: gates are fixed. Removing flights does not remove gate cost unless every route at a gate or airport goes. That is why issue sizes and the savings from cutting flights are stated before gates; each alternative's bottom line subtracts the same {m2(FY2_FISCAL)}, less any gates it releases. Right-Size's flight cuts release none; Shrink to Core's {MINUS}$3.4M already credits the gates it frees (it closes 6 of 20 airports); a full exit of the new markets would free $0.69M. Only releasing a gate saves money.
 Sources: analysis/airline_analysis.sqlite (gates, costs, transactions); analysis/tables/gate_period.csv; HANDOFF.md "Data rules"; OUTLINE.md "Verification notes". Teammate's outputs/tables/05_forecast_scenarios.csv, 05_gate_change_forecast.csv, 05_fiscal_allocation_summary.csv and 05_unassigned_gate_leases.csv agree to the cent (their after-gates figure differs only because their revenue basis drops 759 out-of-window transactions)."""
 
 
@@ -319,7 +322,7 @@ def main():
     build(find_slide(prs, KICKER))
     prs.save(DECK)
     print(f"built Gate leases: {m2(L24)} -> {m2(L25)} -> est {m2(E26)} (fiscal FY25-26 {m2(FY2_FISCAL)}); "
-          f"after gates {money(AFTER)} (fiscal {money(AFTER_FISCAL)}); avg ${AVG:,.0f}/departure")
+          f"after gates {money(AFTER)}; avg ${AVG:,.0f}/departure")
 
 
 if __name__ == "__main__":

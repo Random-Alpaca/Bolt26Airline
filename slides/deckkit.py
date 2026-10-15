@@ -115,11 +115,20 @@ def set_runs(shape, value):
         r._r.getparent().remove(r._r)
 
 
+def drop_orphan_parts(slide):
+    """Drop chart/image relationships nothing on the slide references any more (left behind by reruns)."""
+    xml = slide._element.xml
+    for rId, rel in list(slide.part.rels.items()):
+        if rel.reltype.endswith(("/chart", "/image")) and f'"{rId}"' not in xml:
+            slide.part.drop_rel(rId)
+
+
 def reset(slide, kicker, title, source, notes):
     """Strip a content slide back to its frame, then set kicker, title, source line and speaker notes."""
     for sh in list(slide.shapes):
         if sh.name not in FRAME:
             sh._element.getparent().remove(sh._element)
+    drop_orphan_parts(slide)
     for name, value in (("TextBox 2", kicker), ("TextBox 3", title), ("TextBox 5", source)):
         set_runs(next(s for s in slide.shapes if s.name == name), value)
     slide.notes_slide.notes_text_frame.text = notes

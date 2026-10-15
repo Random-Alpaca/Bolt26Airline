@@ -46,7 +46,8 @@ GATE_ROWS = q("select sum(amount_cents) from gates where year='2025-2026'") / 1e
 GATE_EST = sum(b * b / a for a, b in db.execute(
     "select x.a, y.a from (select distinct city, gate, amount_cents a from gates where year='2024-2025') x "
     "join (select distinct city, gate, amount_cents a from gates where year='2025-2026') y using(city, gate)")) / 1e8
-AFTER = C2 - GATE["2025-2026"]
+GATE_FY = GATE["2025-2026"] * 4 / 12 + GATE_EST * 8 / 12  # FY25-26: Sep-Dec 2025 lease + Jan-Aug 2026 estimate
+AFTER = C2 - GATE_FY  # the deck's after-gates basis (analysis/alternatives.py uses the same accrual)
 # like-for-like cost per flight: same direction and calendar month in both years, FY25-26 flight weights
 LFL = q("with rm as (select route, substr(month,6,2) mm, period, count(*) n, sum(amount_cents)/1e8 c "
         "from cost_events group by route, mm, period) select sum((b.c/b.n - a.c/a.n) * b.n) from rm a join rm b "
@@ -88,23 +89,20 @@ RS = {r["component"]: r for r in alt if r["alternative"] == "Right-Size & Recove
 comp = lambda key: float(next(v for k, v in RS.items() if k.startswith(key))["central_musd"])
 TRUNK, MTL, HALVE, LEVERS = comp("Remove 2025"), comp("Exit Montreal"), comp("Halve"), comp("Revenue recovery")
 TOT = RS["TOTAL"]
-# After gates on the deck's basis (REC_SPEC.md): the 2025-26 lease total charged to FY25-26 (AFTER = -58.25). The
-# csv's own after_gates_* columns may use another gate basis (FY pro-rated $10.02M gives -58.40), so rebuild them
-# from the option's gains: after = AFTER + gates released + gain (low / central / high).
-RS_LO, RS_MID, RS_HI = (AFTER + float(TOT["gates_released_musd"]) + float(TOT[k])
-                        for k in ("low_musd", "central_musd", "high_musd"))
+# After gates: the csv uses the same fiscal-year gate accrual as AFTER ($10.02M, -58.40)
+RS_LO, RS_MID, RS_HI = (float(TOT[k]) for k in ("after_gates_low", "after_gates_central", "after_gates_high"))
 RS_FLIGHTS = int(TOT["flights_removed"])
 audit = json.load(open(ROOT / "analysis/preparation_audit.json"))
 
 # the wording below depends on these; stop rather than publish a sentence the data no longer supports
 assert abs(C2 - -48.38) < 0.01 and abs(C1 - -12.36) < 0.01, (C1, C2)
-assert abs(AFTER - -58.25) < 0.01 and abs(C2 + REFUND2 - -40.54) < 0.01, (AFTER, C2 + REFUND2)
+assert abs(AFTER - -58.40) < 0.01 and abs(GATE_FY - 10.023) < 0.001 and abs(C2 + REFUND2 - -40.54) < 0.01, (AFTER, C2 + REFUND2)
 assert abs(LFL - 15.25) < 0.01 and abs(COST_UP - 45.39) < 0.01, (LFL, COST_UP)
 assert (MONTH_FL["2025-02"], MONTH_FL["2025-03"]) == (792, 1157)
 assert len(P2) == 54 and len(pos) == 26 and abs(five - -48.70) < 0.01 and five < C2
 assert 0.30 < mtl_van / sum(neg) < 0.36 and abs(TOP8_SHARE - 0.713) < 0.002
 assert abs(TRUNK + MTL + HALVE - 54.57) < 0.01 and abs(LEVERS - 5.2) < 0.01, (TRUNK, MTL, HALVE, LEVERS)
-assert (round(RS_LO, 1), round(RS_MID, 2), round(RS_HI, 1)) == (-16.7, 1.52, 5.9), (RS_LO, RS_MID, RS_HI)
+assert (round(RS_LO, 1), round(RS_MID, 2), round(RS_HI, 1)) == (-16.9, 1.37, 5.7), (RS_LO, RS_MID, RS_HI)
 # the top 8 decliners are exactly both directions of the 4 named markets (Halifax–Montréal is 9th/10th)
 assert set(sorted(decline, key=decline.get)[:8]) == FIVE - {"YHZ-YUL", "YUL-YHZ"}
 assert len(FIVE | NEW) == 16 and abs(trunk4 - -28.99) < 0.01 and abs(new3 - -10.25) < 0.01
@@ -270,8 +268,8 @@ def build_exec(s):
          [f"NorthByte flew {FL_UP:.0%} more flights for {REV_UP:.0%} more revenue; Right-Size & Recover reaches "
           "break-even"], TITLE)
     fill(shape(s, "TextBox 5"),
-         ["Source: NorthByte transactions, costs & gates, Sep 2024–Aug 2026; team analysis. After gates = 2025-26 "
-          f"leases (${GATE['2025-2026']:.2f}M). Impact: central case, FY25-26 basis."], SOURCE)
+         ["Source: NorthByte transactions, costs & gates, Sep 2024–Aug 2026; team analysis. After gates = FY25-26 "
+          f"gates (${GATE_FY:.2f}M, pro-rated). Impact: central case, FY25-26 basis."], SOURCE)
     fill(shape(s, "TextBox 8"), [
         f"• FY25-26 revenue +{REV_UP:.1%} to {usd(REV[2])}; flight operating cost +{COST[2] / COST[1] - 1:.1%} "
         f"to {usd(COST[2])}",
@@ -344,10 +342,10 @@ def build_exec(s):
          size=10.5, name=f"{TAG}impact_note")
 
     notes(s, f"""EXECUTIVE SUMMARY. ~45 sec. Answer first.
-Say: "NorthByte flew {FL_UP:.0%} more flights for {REV_UP:.0%} more revenue, and its flight loss nearly quadrupled. The loss sits in the flights added in 2025. We recommend Right-Size & Recover: cut those flights, recover revenue, and run the airline route by route. That takes NorthByte from −$58.3M to about break-even after gates, with all 20 airports kept."
+Say: "NorthByte flew {FL_UP:.0%} more flights for {REV_UP:.0%} more revenue, and its flight loss nearly quadrupled. The loss sits in the flights added in 2025. We recommend Right-Size & Recover: cut those flights, recover revenue, and run the airline route by route. That takes NorthByte from {usd(AFTER)} to about break-even after gates, with all 20 airports kept."
 Left column (what we found), all FY25-26 vs FY24-25 from analysis/airline_analysis.sqlite:
 - Revenue ${REV[1]:.2f}M → ${REV[2]:.2f}M; flight costs ${COST[1]:.2f}M → ${COST[2]:.2f}M. Flights {FLIGHTS[1]:,} → {FLIGHTS[2]:,} (+{FL_UP:.1%}).
-- Contribution {C1:.2f} → {C2:.2f} before gates; {AFTER:.2f} after the ${GATE['2025-2026']:.2f}M of 2025-26 gate leases (each physical gate once, split by departing flights per the case rule). The case's "about $40M" matches our loss with refunds (${REFUND2:.2f}M) left out: {C2 + REFUND2:.2f}. Its "four times the year before" matches only with refunds included ({C2 / C1:.1f}×). If asked: the case's two figures fit different definitions; do not call either an error.
+- Contribution {C1:.2f} → {C2:.2f} before gates; {AFTER:.2f} after ${GATE_FY:.2f}M of FY25-26 gates (each physical gate once; Sep–Dec 2025 lease + Jan–Aug 2026 estimate, each gate repeating its 2025 % rise). The case's "about $40M" matches our loss with refunds (${REFUND2:.2f}M) left out: {C2 + REFUND2:.2f}. Its "four times the year before" matches only with refunds included ({C2 / C1:.1f}×). If asked: the case's two figures fit different definitions; do not call either an error.
 - Monthly margin (revenue by purchase month, costs by flight month): +{MARGIN['2025-02']:.1%} in Feb 2025, {MARGIN['2025-03']:.1%} in Mar, negative every month to Aug 2026. The case says losses ran from February; on our data February is still positive. Second rotations: Montréal–Toronto and Ottawa–Toronto from Mar 2025; Montréal–Vancouver, Halifax–Toronto and Halifax–Montréal from Apr; Montréal–Ottawa launched 1 Mar. Flights Feb → Mar 2025 {MONTH_FL['2025-02']} → {MONTH_FL['2025-03']:,} (+{MONTH_FL['2025-03'] / MONTH_FL['2025-02'] - 1:.0%} as monthly counts; about +32% per day, since February is short). Full year +{FL_UP:.1%}.
 - Cost growth split: like-for-like (same route, same calendar month, FY25-26 flight weights) ${LFL:.2f}M = ⅓ (+7.1% per flight); volume and route mix ${COST_UP - LFL:.2f}M = ⅔ (HANDOFF.md; slide 8).
 - 16 directions = the 4 doubled trunk markets (Montréal–Toronto, Halifax–Toronto, Halifax–Montréal, Ottawa–Toronto; 8 directions) {trunk4:.2f}, Montréal–Vancouver {mtl_van:.2f}, the 3 new markets (London–Toronto, Montréal–Ottawa, Moncton–Halifax) {new3:.2f}: total {five + new3:.2f}; the other 38 directions +{rest38:.2f} (slides/OUTLINE.md "Verification notes").
@@ -367,7 +365,7 @@ def build_situation(s):
                                  "(Sep 2024–Aug 2026), team analysis"], SOURCE)
     notes(s, f"""SITUATION / KEY QUESTION. ~40 sec.
 Set up the case from the brief: domestic carrier, 20 airports, 4 hubs (YVR, YYC, YYZ, YUL), fiscal year Sep–Aug. In early 2025 NorthByte opened 3 new markets and added a second rotation on five trunk markets. Finance reviewed costs only at company level, by category, never route by route (case p.10); that gap is our angle. End on the key question. The values (safety, fairness to customers, connecting communities) are the criteria we use to choose between alternatives later.
-Numbers: revenue ${REV[2]:.2f}M (+{REV_UP:.1%}). −$48M = {C2:.2f} before gates (revenue minus fuel, crew, maintenance and food, analysis/airline_analysis.sqlite); {AFTER:.2f} after ${GATE['2025-2026']:.2f}M of 2025-26 gate leases. The case's "about $40M" matches our loss with refunds excluded ({C2 + REFUND2:.1f}). 20 airports and 54 directional routes counted in the cost file. New markets' first flights: London–Toronto 1 Feb, Montréal–Ottawa 1 Mar, Moncton–Halifax 1 Apr 2025 (the case says "spring 2025").""")
+Numbers: revenue ${REV[2]:.2f}M (+{REV_UP:.1%}). −$48M = {C2:.2f} before gates (revenue minus fuel, crew, maintenance and food, analysis/airline_analysis.sqlite); {AFTER:.2f} after ${GATE_FY:.2f}M of FY25-26 gates (pro-rated by fiscal month; 2026 leases estimated). The case's "about $40M" matches our loss with refunds excluded ({C2 + REFUND2:.1f}). 20 airports and 54 directional routes counted in the cost file. New markets' first flights: London–Toronto 1 Feb, Montréal–Ottawa 1 Mar, Moncton–Halifax 1 Apr 2025 (the case says "spring 2025").""")
 
 
 # ---------- 1 · what changed
@@ -442,7 +440,7 @@ def build_changed(s):
         f"• Flight costs {usd(COST_UP, True)} (+{COST[2] / COST[1] - 1:.1%})",
         f"• Every cost line grew, mostly from {FL_UP:.0%} more flights: fuel {usd(cat['Fuel'], True)}, crew "
         f"{usd(cat['Crew'], True)}, maintenance {usd(cat['Maintenance'], True)}",
-        f"• Gate leases (${GATE['2025-2026']:.2f}M) push the loss to {usd(AFTER)}",
+        f"• FY25-26 gates (${GATE_FY:.1f}M) push the loss to {usd(AFTER)}",
         f"• The case's “about $40M” matches this loss before refunds ({usd(C2 + REFUND2)})",
     ], {"font": BODY, "size": 13, "bold": False, "color": INK})
     fill(shape(s, "TextBox 5"), ["Source: NorthByte transactions & costs, FY24-25 vs FY25-26; contribution = revenue "
@@ -459,7 +457,7 @@ def build_changed(s):
 Say: "Revenue grew ${REV[2] - REV[1]:.1f}M, or {REV_UP:.1%}. Flight costs grew ${COST_UP:.1f}M, or {COST[2] / COST[1] - 1:.1%}: {ratio:.1f} times as fast. A ${-C1:.1f}M loss became ${-C2:.1f}M before gates, and ${-AFTER:.1f}M once gate leases are charged." Then hand over to why costs rose: about ⅔ is more flights and route mix, ⅓ higher cost per flight.
 Bridge (analysis/airline_analysis.sqlite, FY24-25 → FY25-26, before gates): {C1:.2f} + revenue {REV[2] - REV[1]:+.2f} − fuel {cat['Fuel']:.2f} − crew {cat['Crew']:.2f} − maintenance {cat['Maintenance']:.2f} − food {cat['Food']:.2f} = {C2:.2f}. "{ratio:.1f}× faster" compares growth rates (+{COST[2] / COST[1] - 1:.1%} vs +{REV_UP:.1%}); in dollars costs grew {COST_UP / (REV[2] - REV[1]):.1f}× as much as revenue.
 "Mostly from more flights": flights {FLIGHTS[1]:,} → {FLIGHTS[2]:,} (+{FL_UP:.1%}); like-for-like cost per flight (same route and calendar month) explains only fuel ${lfl_cat['Fuel']:.1f}M, crew ${lfl_cat['Crew']:.1f}M and maintenance ${lfl_cat['Maintenance']:.1f}M of these increases; the rest is volume and route mix (slide 8).
-Gates: ${GATE['2025-2026']:.2f}M for the 2025-26 lease year with each physical gate counted once (the raw rows sum to ${GATE_ROWS:.1f}M because shared gates repeat on every route); after gates {AFTER:.2f}, split across departing flights per the case rule.
+Gates: ${GATE['2025-2026']:.2f}M for the 2025-26 lease year with each physical gate counted once (the raw rows sum to ${GATE_ROWS:.1f}M because shared gates repeat on every route). FY25-26 is charged ${GATE_FY:.2f}M (Sep–Dec 2025 lease + Jan–Aug 2026 estimate), so after gates {AFTER:.2f}; split across departing flights per the case rule.
 Case reconciliation: the case's "about $40M" matches our loss without refunds ({C2 + REFUND2:.2f}; refunds ${REFUND2:.2f}M). With refunds included the loss is {C2 / C1:.1f}× the prior year, which matches the case's "four times".""")
 
 
@@ -527,7 +525,7 @@ Numbers (analysis/airline_analysis.sqlite, FY25-26, before gates, 54 directional
 - Top 8 decliners (both directions of Montréal–Vancouver, Halifax–Toronto, Montréal–Toronto, Ottawa–Toronto): {sum(top8):.2f} of the {C2 - C1:.2f} decline = {TOP8_SHARE:.1%}. Halifax–Montréal is 9th and 10th.
 - Hub split (hubs YVR, YYC, YYZ, YUL), outside the 16 expansion directions: hub–hub {n_rest['hub–hub']} directions +{rest['hub–hub']:.2f} (all profitable); hub–regional {n_rest['hub–regional']} directions +{rest['hub–regional']:.2f}; regional–regional {n_rest['regional–regional']} directions {rest['regional–regional']:.2f} (Halifax–St. John's, Edmonton–Yellowknife). Including the expansion, every class loses (hub–hub −21.2, hub–regional −23.9, regional–regional −3.3), so what separates winners from losers is whether a market was expanded, not hub vs regional.
 - Both directions share the same sign in all 27 markets: 13 of 27 markets are profitable.
-- After gates (case rule, 2025-26 leases): 24 of 54 directions positive; the five markets −51.5 of {AFTER:.1f}. Issue sizes stay before gates because gate leases do not fall when flights are cut.""")
+- After gates (case rule; the count is the same on the 2025 lease total or the FY25-26 accrual): 24 of 54 directions positive; the five markets −51.5 of {AFTER:.1f}. Issue sizes stay before gates because gate leases do not fall when flights are cut.""")
 
 
 # ---------- appendix A1
@@ -569,7 +567,7 @@ def build_a1(s):
 Use for "how did you handle X?" questions.
 Sources: analysis/preparation_audit.json ({a['raw_transaction_rows']:,} raw transaction rows → {a['deduplicated_transaction_rows']:,}; {a['removed_duplicate_rows']:,} duplicates worth ${a['removed_duplicate_revenue_cents'] / 1e8:.2f}M; {a['date_fallback_rows']} fallback dates worth ${a['date_fallback_gross_cents'] / 100:,.0f}; {a['cost_rows']:,} cost rows; {a['booking_count']:,} bookings) and analysis/ASSUMPTIONS.md (1 duplicates, 2 dates, 4–5 money and contribution, 6 categories, 8 flights, 10 routes, 16 Cost_Date time = departure time).
 Assumption 16: the data dictionary only says "the date and time of the flight". We read it as departure time because each route repeats fixed slots in two groups (06:30–08:00 and 12:00–18:10). Any cut-off from 08:01 to 12:00 gives the same split, and if the time were arrival the two groups would still separate, so the afternoon-flight finding does not depend on it.
-Gates: lease totals from the gates table with each (city, gate, year) once: ${GATE['2024-2025']:.4f}M and ${GATE['2025-2026']:.4f}M; row sum ${GATE_ROWS:.4f}M. The headline after-gates loss ({AFTER:.2f}) charges the 2025-26 lease total to FY25-26. The 2026-27 estimate (${GATE_EST:.3f}M) repeats each gate's 2024-25 → 2025-26 percentage increase, the same method and total as the teammate's gate forecast table; using it with fiscal-year pro-rating moves the loss only to about −$58.4M (analysis/key_issues_verification.md).
+Gates: lease totals from the gates table with each (city, gate, year) once: ${GATE['2024-2025']:.4f}M and ${GATE['2025-2026']:.4f}M; row sum ${GATE_ROWS:.4f}M. The 2026-27 estimate (${GATE_EST:.3f}M) repeats each gate's 2024-25 → 2025-26 percentage increase (same method and total as the teammate's gate forecast table). FY25-26 gates = 4/12 of the 2025 lease + 8/12 of the 2026 estimate = ${GATE_FY:.3f}M, so the headline after-gates loss is {AFTER:.2f} (analysis/alternatives.py uses the same basis).
 Connections: 12,912 bookings hold tickets on two routes; 12,644 connect through a hub and 268 are return trips (HANDOFF.md).""")
 
 

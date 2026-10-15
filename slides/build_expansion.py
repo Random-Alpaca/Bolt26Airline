@@ -210,9 +210,9 @@ def series(key, nd=1):
     return [rnd(a) for a, _ in vals], [rnd(b) for _, b in vals]
 
 
-TITLE = "Most of the loss came from doubling flights on existing trunk routes, not the 3 new markets"
-SOURCE = ("Source: NorthByte transactions & costs, Sep–Feb FY24-25 vs FY25-26; revenue by purchase month, cost by "
-          "flight date; before gates")
+TITLE = "Doubling flights on 5 trunk markets drove most of the loss; the 3 new markets added a smaller one"
+SOURCE = ("Source: NorthByte transactions & costs, Sep–Feb FY24-25 vs FY25-26 unless stated; revenue by purchase "
+          "month, cost by flight date; before gates")
 
 
 def build(s):
@@ -256,8 +256,8 @@ def build(s):
     b = {"bold": True, "color": NAVY}
     text(s, 0.6, 6.33, 7.95, 0.55, [[
         ("Doubled trunk", b),
-        (" (10 directions): Montréal–Toronto, Halifax–Toronto, Halifax–Montréal, Ottawa–Toronto, Montréal–Vancouver; "
-         "each got an afternoon flight for every morning flight from Mar/Apr 2025.  ", {}),
+        (" (10 directions): the 4 doubled trunk markets (Montréal–Toronto, Halifax–Toronto, Halifax–Montréal, "
+         "Ottawa–Toronto) plus Montréal–Vancouver; each got an afternoon flight for every morning flight from Mar/Apr 2025.  ", {}),
         ("New markets", b), (" (6): London–Toronto (Feb 2025), Montréal–Ottawa, Moncton–Halifax.  ", {}),
         ("Other routes", b), (": the other 38 directions.", {})]], size=10.5)
 
@@ -276,7 +276,7 @@ def build(s):
          f"and Ottawa–Toronto in March ({fx['mar_before']:.3f} → {fx['mar_after']:.3f}); Halifax–Toronto, "
          f"Halifax–Montréal and Montréal–Vancouver in April ({fx['apr_before']:.3f} → {fx['apr_after']:.3f})."),
         ("Few new passengers.",
-         f" Each added trunk flight carried ~{r1(extra_tix)} extra tickets; it needed ~{breakeven:.0f} to break even."),
+         f" Each added trunk flight drew ~{r1(extra_tix)} extra tickets vs trend; break-even needed ~{breakeven:.0f}."),
         ("Waiting won't fix it.",
          f" Apr–Aug 2026 trunk tickets {pct(apr_aug_tix)} vs 2025, on an identical schedule. New markets still cover "
          f"only a third of their cost."),
@@ -288,7 +288,7 @@ def build(s):
         label(box(s, px + 0.25, y + 0.02, 0.3, 0.3, fill=ORANGE, shape=MSO_SHAPE.OVAL), str(i), size=10)
         text(s, px + 0.68, y, tw, h, [runs], size=size)
         y += h + 0.1
-    imp = [("→ Remove the added trunk flights first; the new markets are a smaller fix.",
+    imp = [("→ Fix the trunk first; the new markets are a smaller fix.",
             {"bold": True, "color": ORANGE})]
     ih = est_height(imp, pw - 0.45, size) * 1.08
     assert y + 0.05 < py + ph - 0.14 - ih, f"SO WHAT items run to {y:.2f}in"
